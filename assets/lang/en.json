@@ -1,0 +1,28 @@
+{
+
+  "onboardT1": "Welcome to Our App",
+  "onboardT2": "Stay Connected",
+  "onboardT3": "Get Started",
+  "onboardD1": "Discover new possibilities with our app.",
+  "onboardD2": "Keep in touch with your beloved ones.",
+  "onboardD3": "Start using our app today!",
+  "skip": "Skip",
+  "next": "Next",
+  "getStarted": "Get Started",
+
+
+  "tryAgain": "Try Again",
+  "passwordLabel" : "Fill your password",
+  "confirmPasswordLabel" : "Confirm your password",
+  "phoneLabel" : "Fill your phone number",
+  "loginLabel": "Login",
+  "login": "Login",
+  "forgotPasswordLabel": "Forgot Password?",
+  "forgotPassword": "Forgot Password?",
+  "signupLabel" : "Sign Up",
+  "signup" : "Sign Up",
+  "newUser": "New User?",
+  "privacyPolicy": "Privacy Policy",
+  "termsOfUse": "Terms of User",
+  "and": "and"
+}
