@@ -35,7 +35,7 @@ class PasswordTextFieldState extends State<PasswordTextField> {
       enabled: widget.enabled,
       controller: _controller,
       keyboardType: TextInputType.visiblePassword,
-      obscureText: _isPasswordVisible,
+      obscureText: !_isPasswordVisible,
       // Hide password
       decoration: InputDecoration(
         hintText: widget.label ?? 'passwordLabel'.tr(),
