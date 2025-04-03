@@ -4,7 +4,7 @@ import '../../data/dto/login_dto.dart';
 abstract class AuthRepository {
   // Auth
   Future<NetworkResource<LoginDto>> login({
-    required String email,
+    required String phone,
     required String password,
   });
 

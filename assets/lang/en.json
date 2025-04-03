@@ -6,23 +6,42 @@
   "onboardD1": "Discover new possibilities with our app.",
   "onboardD2": "Keep in touch with your beloved ones.",
   "onboardD3": "Start using our app today!",
-  "skip": "Skip",
-  "next": "Next",
-  "getStarted": "Get Started",
 
+  "loginTitle": "Login",
+  "loginDescription" : "Use your mobile number to login",
 
-  "tryAgain": "Try Again",
-  "passwordLabel" : "Fill your password",
-  "confirmPasswordLabel" : "Confirm your password",
-  "phoneLabel" : "Fill your phone number",
-  "loginLabel": "Login",
-  "login": "Login",
-  "forgotPasswordLabel": "Forgot Password?",
-  "forgotPassword": "Forgot Password?",
-  "signupLabel" : "Sign Up",
-  "signup" : "Sign Up",
+  "forgotPasswordTitle": "Enter mobile number",
+  "forgotPasswordDescription" : "We will reset your password using your mobile number.",
+
+  "otpTitle": "Enter the OTP",
+  "otpDescription" : "Enter the 6-digit code sent to your mobile number.",
+
+  "resetPasswordTitle": "Reset Password",
+  "resetPasswordDescription" : "Please enter your new password.",
+
+  "signupTitle": "Create Account",
+  "signupDescription": "Enter your email and password to complete the registration.",
+  "signupHint" : "By clicking on Signup, you agree to",
+  "termsCondition" : "Terms & Conditions",
+
+  "haveAccount" : "Have Account?",
   "newUser": "New User?",
   "privacyPolicy": "Privacy Policy",
   "termsOfUse": "Terms of User",
-  "and": "and"
+
+  "phoneLabel" : "Fill your phone number",
+  "passwordLabel" : "Fill your password",
+  "createPasswordLabel" : "Create your password",
+  "confirmPasswordLabel" : "Confirm your password",
+  "emailLabel" : "Fill your email address",
+
+  "skip": "Skip",
+  "next": "Next",
+  "getStarted": "Get Started",
+  "and": "and",
+  "tryAgain": "Try Again",
+  "login" : "Login",
+  "forgotPassword" : "Forgot Password?",
+  "resetPassword" : "Reset Password",
+  "signup" : "Sign Up"
 }

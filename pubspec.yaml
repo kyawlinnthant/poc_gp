@@ -1,5 +1,5 @@
 name: poc
-description: "A new Flutter project."
+description: "POC for GreenPacket"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.1+1
 
@@ -22,6 +22,8 @@ dependencies:
   #  navigation
   go_router: ^14.8.1
   dio: ^5.8.0+1
+  flutter_bloc: ^9.1.0
+  equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:

@@ -1,25 +1,42 @@
-import '../service/auth_api_service.dart';
+import 'package:poc/data/store/user_data/app_user_store.dart';
+
 import '../../../../../data/network/resource/network_resource.dart';
+import '../../../../../data/store/app_data/app_data_store.dart';
+import '../../../../../data/store/keys_data/app_key_store.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../dto/login_dto.dart';
+import '../service/auth_api_service.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthApiService apiService;
+  final AppUserStore appUserStore;
+  final AppKeyStore appKeyStore;
+  final AppDataStore appDataStore;
 
-  AuthRepositoryImpl({required this.apiService});
+  AuthRepositoryImpl({
+    required this.appUserStore,
+    required this.appKeyStore,
+    required this.appDataStore,
+    required this.apiService,
+  });
 
   // Auth
   @override
   Future<NetworkResource<LoginDto>> login({
-    required String email,
+    required String phone,
     required String password,
   }) async {
+    // todo:
+    await Future.delayed(Duration(seconds: 2));
+
+    return NetworkFailed(message: "Something went wrong!");
+
     final response = await apiService.login(
-      username: email,
+      username: phone,
       password: password,
     );
 
-    if (response is Success<LoginDto>) {
+    if (response is NetworkSuccess<LoginDto>) {
       final data = response.data!;
       if (data.accessToken.isNotEmpty) {
         // await prefService.setToken(token: data.accessToken);
@@ -51,10 +68,10 @@ class AuthRepositoryImpl extends AuthRepository {
       confirmPassword: confirmPassword,
     );
     switch (response) {
-      case Success<bool>():
-        return Success(data: true);
-      case Failed<bool>():
-        return Failed(message: response.message);
+      case NetworkSuccess<bool>():
+        return NetworkSuccess(data: true);
+      case NetworkFailed<bool>():
+        return NetworkFailed(message: response.message);
     }
   }
 }

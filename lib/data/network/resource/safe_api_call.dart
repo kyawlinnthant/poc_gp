@@ -11,19 +11,19 @@ Future<NetworkResource<T>> safeApiCall<T>({
     final response = await dioRequest;
 
     if (response.statusCode! >= 200 && response.statusCode! < 300) {
-      return Success(data: fromJson(response.data));
+      return NetworkSuccess(data: fromJson(response.data));
     } else {
       final errorResponse = ErrorResponse.fromJson(response.data);
-      return Failed(message: errorResponse.message);
+      return NetworkFailed(message: errorResponse.message);
     }
   } on DioException catch (e) {
     if (e.response != null) {
       final errorResponse = ErrorResponse.fromJson(e.response!.data);
-      return Failed(message: errorResponse.message);
+      return NetworkFailed(message: errorResponse.message);
     } else {
-      return Failed(message: 'Server error: ${e.message}');
+      return NetworkFailed(message: 'Server error: ${e.message}');
     }
   } catch (e) {
-    return Failed(message: 'Unexpected error: ${e.toString()}');
+    return NetworkFailed(message: 'Unexpected error: ${e.toString()}');
   }
 }

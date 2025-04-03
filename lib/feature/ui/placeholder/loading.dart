@@ -8,6 +8,6 @@ class LoadingPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircularProgressIndicator(color: color ?? context.colors.primary);
+    return CircularProgressIndicator(color: color ?? context.colors.onPrimary);
   }
 }

@@ -1,30 +1,43 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class LogInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    debugPrint("🚀 [REQUEST] ${options.method} ${options.uri}");
-    debugPrint("📤 Headers: ${options.headers}");
-    debugPrint("📤 Body: ${options.data}");
+    log(
+      "🚀 [REQUEST]\n\n "
+      "URI      :${options.uri} \n "
+      "METHOD   :${options.method} \n "
+      "HEADERS  :${options.headers} \n "
+      "DATA     :${options.data} \n\n ",
+    );
     super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    debugPrint(
-      "✅ [RESPONSE] ${response.statusCode} ${response.requestOptions.uri}",
+    log(
+      "✅ [RESPONSE]\n\n "
+      "URI          :${response.requestOptions.uri} \n "
+      "STATUS CODE  :${response.statusCode} \n "
+      "HEADERS      :${response.headers} \n "
+      "MESSAGE      :${response.statusMessage} \n "
+      "DATA         :${response.data} \n\n ",
     );
-    debugPrint("📥 Data: ${response.data}");
     super.onResponse(response, handler);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    debugPrint(
-      "❌ [ERROR] ${err.response?.statusCode} ${err.requestOptions.uri}",
+    log(
+      "❌ [ERROR]\n\n "
+      "URI          :${err.requestOptions.uri} \n "
+      "STATUS CODE  :${err.response?.statusCode} \n "
+      "HEADERS      :${err.response?.headers} \n "
+      "MESSAGE      :${err.response?.statusMessage} \n "
+      "DATA         :${err.response?.data} \n\n ",
     );
-    debugPrint("⚠️ Message: ${err.message}");
     super.onError(err, handler);
   }
 }

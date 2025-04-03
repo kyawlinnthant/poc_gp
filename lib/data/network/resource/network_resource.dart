@@ -4,12 +4,12 @@ sealed class NetworkResource<T> {
   const NetworkResource({this.data});
 }
 
-class Success<T> extends NetworkResource<T> {
-  const Success({required T data}) : super(data: data);
+class NetworkSuccess<T> extends NetworkResource<T> {
+  const NetworkSuccess({required T data}) : super(data: data);
 }
 
-class Failed<T> extends NetworkResource<T> {
+class NetworkFailed<T> extends NetworkResource<T> {
   final String message;
 
-  const Failed({required this.message});
+  const NetworkFailed({required this.message});
 }
