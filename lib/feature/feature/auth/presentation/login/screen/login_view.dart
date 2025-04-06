@@ -62,6 +62,7 @@ class LoginView extends StatelessWidget {
                         },
                         onClickPrefix: () {},
                         errorMessage: state.phoneError,
+                        prefix: state.prefix,
                       ),
                       VerticalSpacer(),
                       PasswordTextField(
@@ -103,7 +104,7 @@ class LoginView extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                context.push(Routes.register);
+                                context.push(Routes.otpRequest);
                               },
                               child: Text('signup'.tr()),
                             ),

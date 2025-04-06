@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:poc/core/navigation/routes.dart';
+import 'package:poc/feature/feature/auth/presentation/otp_request/screen/otp_request_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
 import '../../data/store/app_data/app_launch_mode.dart';
@@ -18,6 +19,10 @@ final GoRouter appNavigator = GoRouter(
     GoRoute(path: Routes.onboard, builder: (context, state) => OnBoardScreen()),
     // AUTH
     GoRoute(path: Routes.login, builder: (context, state) => LoginScreen()),
+    GoRoute(
+      path: Routes.otpRequest,
+      builder: (context, state) => RequestOtpScreen(),
+    ),
     GoRoute(path: Routes.register, builder: (context, state) => SignupScreen()),
     GoRoute(
       path: Routes.forgotPassword,
@@ -49,33 +54,6 @@ final GoRouter appNavigator = GoRouter(
       return Routes.landing;
     }
 
-    // if (isAuthenticated && state.matchedLocation == Routes.login) {
-    //   return Routes.dashboard;
-    // }
-
     return null;
-
-    if (launchMode == AppLaunchMode.onboard &&
-        state.matchedLocation != Routes.onboard) {
-      return Routes.onboard;
-    } else if (launchMode == AppLaunchMode.auth &&
-        state.matchedLocation != Routes.login) {
-      return Routes.login;
-    } else if (launchMode == AppLaunchMode.landing &&
-        state.matchedLocation != Routes.landing) {
-      return Routes.landing;
-    }
-    return null;
-
-    switch (launchMode) {
-      case AppLaunchMode.onboard:
-        return Routes.onboard;
-
-      case AppLaunchMode.auth:
-        return Routes.login;
-
-      case AppLaunchMode.landing:
-        return Routes.landing;
-    }
   },
 );

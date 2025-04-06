@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:poc/data/network/resource/safe_api_call.dart';
+import 'package:poc/data/network/resource/success_response.dart';
 
 import '../../../../../data/network/dio_client.dart';
 import '../../../../../data/network/resource/network_resource.dart';
@@ -11,6 +12,20 @@ class AuthApiService {
   AuthApiService({required this.dioClient});
 
   // Auth
+  Future<NetworkResource<SuccessResponse>> requestOTP({
+    required String username,
+    required String authId,
+  }) async {
+    return safeApiCall<SuccessResponse>(
+      dioRequest: dioClient.post(
+        '/api/account/v3/user-register-v1-send-otp',
+        data: {'UserName': username, 'AuthId': authId},
+        options: Options(contentType: Headers.jsonContentType),
+      ),
+      fromJson: (json) => SuccessResponse.fromJson(json),
+    );
+  }
+
   Future<NetworkResource<LoginDto>> login({
     required String username,
     required String password,

@@ -21,7 +21,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           await _login(emit);
         case OnUpdatePhone():
           emit(state.copyWith(phone: event.phone, phoneError: ''));
-          throw UnimplementedError();
         case OnUpdatePassword():
           emit(state.copyWith(password: event.password, passwordError: ''));
       }

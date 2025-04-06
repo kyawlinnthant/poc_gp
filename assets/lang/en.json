@@ -13,6 +13,9 @@
   "forgotPasswordTitle": "Enter mobile number",
   "forgotPasswordDescription" : "We will reset your password using your mobile number.",
 
+  "otpRequestTitle": "Sign Up",
+  "otpRequestDescription" : "Enter your mobile number to receive an OTP.",
+
   "otpTitle": "Enter the OTP",
   "otpDescription" : "Enter the 6-digit code sent to your mobile number.",
 
@@ -43,5 +46,6 @@
   "login" : "Login",
   "forgotPassword" : "Forgot Password?",
   "resetPassword" : "Reset Password",
-  "signup" : "Sign Up"
+  "signup" : "Sign Up",
+  "somethingWentWrong" : "Something went wrong!"
 }

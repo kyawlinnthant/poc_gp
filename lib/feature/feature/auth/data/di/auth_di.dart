@@ -4,6 +4,7 @@ import 'package:poc/data/store/user_data/app_user_store.dart';
 import 'package:poc/feature/feature/auth/data/repository/auth_repository_impl.dart';
 import 'package:poc/feature/feature/auth/data/service/auth_api_service.dart';
 import 'package:poc/feature/feature/auth/domain/repository/auth_repository.dart';
+import 'package:poc/feature/feature/auth/presentation/otp_request/bloc/request_otp_bloc.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/bloc/signup_bloc.dart';
 
 import '../../../../../core/di/di.dart';
@@ -32,5 +33,8 @@ void _provideAuthBloc() {
   );
   getIt.registerFactory<SignupBloc>(
     () => SignupBloc(repository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<RequestOtpBloc>(
+    () => RequestOtpBloc(repository: getIt<AuthRepository>()),
   );
 }

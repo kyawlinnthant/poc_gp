@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:poc/data/network/resource/success_response.dart';
 import 'package:poc/data/store/user_data/app_user_store.dart';
 
 import '../../../../../data/network/resource/network_resource.dart';
@@ -21,6 +23,33 @@ class AuthRepositoryImpl extends AuthRepository {
   });
 
   // Auth
+
+  @override
+  Future<NetworkResource<bool>> requestOtp({
+    required String phone,
+    required String authId,
+  }) async {
+    final response = await apiService.requestOTP(
+      username: phone,
+      authId: authId,
+    );
+
+    switch (response) {
+      case NetworkSuccess<SuccessResponse>():
+        final data = response.data!;
+        if (data.success) {
+          return NetworkSuccess(data: data.success);
+        } else {
+          return NetworkFailed(
+            message: data.message ?? 'somethingWentWrong'.tr(),
+          );
+        }
+
+      case NetworkFailed<SuccessResponse>():
+        return NetworkFailed(message: response.message);
+    }
+  }
+
   @override
   Future<NetworkResource<LoginDto>> login({
     required String phone,

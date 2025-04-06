@@ -2,6 +2,7 @@ part of 'login_bloc.dart';
 
 @immutable
 class LoginState extends Equatable {
+  final String prefix;
   final String phone;
   final String password;
   final String phoneError;
@@ -9,6 +10,7 @@ class LoginState extends Equatable {
   final UiState uiState;
 
   const LoginState({
+    this.prefix = '60',
     this.phone = '',
     this.password = '',
     this.phoneError = '',
@@ -17,6 +19,7 @@ class LoginState extends Equatable {
   });
 
   LoginState copyWith({
+    String? prefix,
     String? phone,
     String? password,
     String? phoneError,
@@ -24,6 +27,7 @@ class LoginState extends Equatable {
     UiState? uiState,
   }) {
     return LoginState(
+      prefix: prefix ?? this.prefix,
       phone: phone ?? this.phone,
       password: password ?? this.password,
       phoneError: phoneError ?? this.phoneError,
@@ -34,6 +38,7 @@ class LoginState extends Equatable {
 
   @override
   List<Object?> get props => [
+    prefix,
     phone,
     password,
     phoneError,

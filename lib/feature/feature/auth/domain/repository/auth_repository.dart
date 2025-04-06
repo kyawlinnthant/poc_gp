@@ -3,6 +3,11 @@ import '../../data/dto/login_dto.dart';
 
 abstract class AuthRepository {
   // Auth
+  Future<NetworkResource<bool>> requestOtp({
+    required String phone,
+    required String authId,
+  });
+
   Future<NetworkResource<LoginDto>> login({
     required String phone,
     required String password,

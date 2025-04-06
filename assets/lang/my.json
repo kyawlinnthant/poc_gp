@@ -12,6 +12,9 @@
   "forgotPasswordTitle": "မိုဘိုင်းနံပါတ် ဖြည့်ပါ",
   "forgotPasswordDescription": "သင့် မိုဘိုင်းနံပါတ် ဖြင့် စကားဝှက် ပြန်လည်သတ်မှတ်ပေးမည်။",
 
+  "otpRequestTitle": "အကောင့်ဖွင့်ရန်",
+  "otpRequestDescription": "OTP လက်ခံရန် မိုဘိုင်းနံပါတ်ကိုထည့်ပါ။",
+
   "otpTitle": "OTP ကို ထည့်ပါ",
   "otpDescription": "သင့် မိုဘိုင်းနံပါတ်သို့ ပို့ထားသော ၆ လုံးဂဏန်းကုဒ်ကို ထည့်ပါ။",
 
@@ -42,5 +45,6 @@
   "login": "လော့ဂ်အင်",
   "forgotPassword": "စကားဝှက် မေ့နေပါသလား?",
   "resetPassword": "စကားဝှက် ပြန်လည်သတ်မှတ်ပါ",
-  "signup": "အကောင့် ဖွင့်ပါ"
+  "signup": "အကောင့် ဖွင့်ပါ",
+  "somethingWentWrong": "တစ်ခုခုမှားနေပါသည်!"
 }

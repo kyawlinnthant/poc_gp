@@ -42,6 +42,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         PhoneTextField(
                           onChanged: (String v) {},
                           onClickPrefix: () {},
+                          prefix: '60',
                         ),
                         VerticalSpacer(),
                       ],

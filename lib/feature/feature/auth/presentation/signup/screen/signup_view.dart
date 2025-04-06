@@ -82,6 +82,7 @@ class SignupView extends StatelessWidget {
                               },
                               onClickPrefix: () {},
                               errorMessage: state.phoneError,
+                              prefix: state.prefix,
                             ),
                             VerticalSpacer(),
                             PasswordTextField(

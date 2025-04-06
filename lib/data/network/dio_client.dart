@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:poc/data/network/interceptor/log_interceptor.dart';
 
 import 'interceptor/header_interceptor.dart';
 
@@ -8,8 +9,12 @@ class DioClient {
   DioClient()
     : _dio = Dio(
         BaseOptions(
-          baseUrl: 'http://jyapibeta.masteryacademy.com',
-          headers: {'Content-Type': 'application/json; charset=UTF-8'},
+          baseUrl: 'https://intstaging.kiplepay.com:2087',
+          headers: {
+            'Accept': 'application/json; charset=utf-8',
+            'Content-Type': 'application/json; charset=utf-8',
+            'Accept-Language': 'US',
+          },
           responseType: ResponseType.json,
           sendTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 10),
@@ -18,7 +23,7 @@ class DioClient {
           },
         ),
       ) {
-    _dio.interceptors.addAll([HeaderInterceptor(), LogInterceptor()]);
+    _dio.interceptors.addAll([HeaderInterceptor(), LoggerInterceptor()]);
   }
 
   Dio get dio => _dio;

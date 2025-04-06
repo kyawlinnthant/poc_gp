@@ -14,6 +14,7 @@ class PhoneTextField extends StatefulWidget {
   final bool enabled;
   final bool shownOverSolidBackground;
   final VoidCallback onClickPrefix;
+  final String prefix;
 
   const PhoneTextField({
     super.key,
@@ -23,6 +24,7 @@ class PhoneTextField extends StatefulWidget {
     this.enabled = true,
     this.shownOverSolidBackground = false,
     required this.onClickPrefix,
+    required this.prefix,
   });
 
   @override
@@ -87,7 +89,10 @@ class PhoneTextFieldState extends State<PhoneTextField> {
         prefixIcon: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextButton(onPressed: widget.onClickPrefix, child: Text('+00')),
+            TextButton(
+              onPressed: widget.onClickPrefix,
+              child: Text('+${widget.prefix}'),
+            ),
             SizedBox(
               width: 1.5,
               height: Dimens.paddingBase3x,

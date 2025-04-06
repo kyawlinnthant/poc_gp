@@ -3,6 +3,7 @@ part of 'signup_bloc.dart';
 @immutable
 class SignupState extends Equatable {
   final String email;
+  final String prefix;
   final String phone;
   final String password;
   final String confirmPassword;
@@ -14,6 +15,7 @@ class SignupState extends Equatable {
 
   const SignupState({
     this.email = '',
+    this.prefix = '60',
     this.phone = '',
     this.password = '',
     this.confirmPassword = '',
@@ -26,6 +28,7 @@ class SignupState extends Equatable {
 
   SignupState copyWith({
     String? email,
+    String? prefix,
     String? phone,
     String? password,
     String? confirmPassword,
@@ -37,6 +40,7 @@ class SignupState extends Equatable {
   }) {
     return SignupState(
       email: email ?? this.email,
+      prefix: prefix ?? this.prefix,
       phone: phone ?? this.phone,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
@@ -51,6 +55,7 @@ class SignupState extends Equatable {
   @override
   List<Object?> get props => [
     email,
+    prefix,
     phone,
     password,
     confirmPassword,
