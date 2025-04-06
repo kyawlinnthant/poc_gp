@@ -23,13 +23,61 @@ class AuthRepositoryImpl extends AuthRepository {
   });
 
   // Auth
-
   @override
   Future<NetworkResource<bool>> requestOtp({
     required String phone,
     required String authId,
   }) async {
     final response = await apiService.requestOTP(
+      username: phone,
+      authId: authId,
+    );
+
+    switch (response) {
+      case NetworkSuccess<SuccessResponse>():
+        final data = response.data!;
+        if (data.success) {
+          return NetworkSuccess(data: data.success);
+        } else {
+          return NetworkFailed(
+            message: data.message ?? 'somethingWentWrong'.tr(),
+          );
+        }
+
+      case NetworkFailed<SuccessResponse>():
+        return NetworkFailed(message: response.message);
+    }
+  }
+
+  @override
+  Future<NetworkResource<bool>> verifyOtp({
+    required String phone,
+    required String otp,
+  }) async {
+    final response = await apiService.verifyOTP(username: phone, otp: otp);
+
+    switch (response) {
+      case NetworkSuccess<SuccessResponse>():
+        final data = response.data!;
+        if (data.success) {
+          return NetworkSuccess(data: data.success);
+        } else {
+          return NetworkFailed(
+            message: data.message ?? 'somethingWentWrong'.tr(),
+          );
+        }
+
+      case NetworkFailed<SuccessResponse>():
+        return NetworkFailed(message: response.message);
+    }
+  }
+
+  @override
+  Future<NetworkResource<bool>> resentOtp({
+    required String phone,
+    required String authId,
+  }) async {
+    final response = await apiService.resendOTP(
       username: phone,
       authId: authId,
     );

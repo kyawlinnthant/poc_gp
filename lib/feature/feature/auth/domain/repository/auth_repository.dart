@@ -8,6 +8,16 @@ abstract class AuthRepository {
     required String authId,
   });
 
+  Future<NetworkResource<bool>> verifyOtp({
+    required String phone,
+    required String otp,
+  });
+
+  Future<NetworkResource<bool>> resentOtp({
+    required String phone,
+    required String authId,
+  });
+
   Future<NetworkResource<LoginDto>> login({
     required String phone,
     required String password,

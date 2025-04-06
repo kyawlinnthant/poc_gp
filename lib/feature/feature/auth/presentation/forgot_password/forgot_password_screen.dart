@@ -17,6 +17,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       isLoading: false,
       child: Scaffold(
         appBar: AppBar(title: Text('forgotPassword'.tr())),
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: Dimens.paddingBase3x),
           child: Center(

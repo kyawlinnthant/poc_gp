@@ -5,11 +5,13 @@ import 'package:poc/feature/feature/auth/data/repository/auth_repository_impl.da
 import 'package:poc/feature/feature/auth/data/service/auth_api_service.dart';
 import 'package:poc/feature/feature/auth/domain/repository/auth_repository.dart';
 import 'package:poc/feature/feature/auth/presentation/otp_request/bloc/request_otp_bloc.dart';
+import 'package:poc/feature/feature/auth/presentation/otp_verify/bloc/verify_otp_bloc.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/bloc/signup_bloc.dart';
 
 import '../../../../../core/di/di.dart';
 import '../../../../../data/network/dio_client.dart';
 import '../../presentation/login/bloc/login_bloc.dart';
+import '../../presentation/otp_verify/resend/resend_cubit.dart';
 
 void provideAuthDi() {
   getIt.registerLazySingleton<AuthApiService>(
@@ -36,5 +38,8 @@ void _provideAuthBloc() {
   );
   getIt.registerFactory<RequestOtpBloc>(
     () => RequestOtpBloc(repository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<VerifyOtpBloc>(
+    () => VerifyOtpBloc(repository: getIt<AuthRepository>()),
   );
 }

@@ -26,6 +26,34 @@ class AuthApiService {
     );
   }
 
+  Future<NetworkResource<SuccessResponse>> verifyOTP({
+    required String username,
+    required String otp,
+  }) async {
+    return safeApiCall<SuccessResponse>(
+      dioRequest: dioClient.post(
+        '/api/account/v3/user-register-verify-otp',
+        data: {'UserName': username, 'Otp': otp},
+        options: Options(contentType: Headers.jsonContentType),
+      ),
+      fromJson: (json) => SuccessResponse.fromJson(json),
+    );
+  }
+
+  Future<NetworkResource<SuccessResponse>> resendOTP({
+    required String username,
+    required String authId,
+  }) async {
+    return safeApiCall<SuccessResponse>(
+      dioRequest: dioClient.post(
+        '/api/account/v3/user-register-v1-send-otp',
+        data: {'UserName': username, 'AuthId': authId},
+        options: Options(contentType: Headers.jsonContentType),
+      ),
+      fromJson: (json) => SuccessResponse.fromJson(json),
+    );
+  }
+
   Future<NetworkResource<LoginDto>> login({
     required String username,
     required String password,

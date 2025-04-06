@@ -31,7 +31,10 @@ class RequestOtpView extends StatelessWidget {
           );
         }
         if (state.uiState is UiSuccess) {
-          context.push(Routes.landing);
+          context.push(
+            Routes.otpVerify,
+            extra: "${state.prefix}${state.phone}",
+          );
         }
       },
       builder: (context, state) {
@@ -39,6 +42,7 @@ class RequestOtpView extends StatelessWidget {
           isLoading: state.uiState is UiLoading,
           child: Scaffold(
             appBar: AppBar(),
+            resizeToAvoidBottomInset: false,
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: Dimens.paddingBase3x),
               child: Center(

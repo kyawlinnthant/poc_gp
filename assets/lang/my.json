@@ -46,5 +46,6 @@
   "forgotPassword": "စကားဝှက် မေ့နေပါသလား?",
   "resetPassword": "စကားဝှက် ပြန်လည်သတ်မှတ်ပါ",
   "signup": "အကောင့် ဖွင့်ပါ",
-  "somethingWentWrong": "တစ်ခုခုမှားနေပါသည်!"
+  "somethingWentWrong": "တစ်ခုခုမှားနေပါသည်!",
+  "verifyNumber": "ဖုန်းနံပါတ်အတည်ပြုရန်"
 }

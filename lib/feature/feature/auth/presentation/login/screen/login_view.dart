@@ -40,6 +40,7 @@ class LoginView extends StatelessWidget {
         return ModalLoaderPlaceholder(
           isLoading: state.uiState is UiLoading,
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             body: OrientationView(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: Dimens.paddingBase3x),

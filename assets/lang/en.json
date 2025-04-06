@@ -47,5 +47,9 @@
   "forgotPassword" : "Forgot Password?",
   "resetPassword" : "Reset Password",
   "signup" : "Sign Up",
-  "somethingWentWrong" : "Something went wrong!"
+  "somethingWentWrong" : "Something went wrong!",
+  "verifyNumber": "Verify Number",
+  "notReceiveIt" : "Didn't receive it?",
+  "resend" : "Resend",
+  "resendCode" : "Resend again in :"
 }

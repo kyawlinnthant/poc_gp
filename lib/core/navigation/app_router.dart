@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:poc/core/navigation/routes.dart';
 import 'package:poc/feature/feature/auth/presentation/otp_request/screen/otp_request_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/otp_verify/screen/verify_otp_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
 import '../../data/store/app_data/app_launch_mode.dart';
@@ -23,6 +24,14 @@ final GoRouter appNavigator = GoRouter(
       path: Routes.otpRequest,
       builder: (context, state) => RequestOtpScreen(),
     ),
+    GoRoute(
+      path: Routes.otpVerify,
+      builder: (context, state) {
+        final phone = state.extra as String;
+        return VerifyOtpScreen(phone: phone);
+      },
+    ),
+
     GoRoute(path: Routes.register, builder: (context, state) => SignupScreen()),
     GoRoute(
       path: Routes.forgotPassword,
