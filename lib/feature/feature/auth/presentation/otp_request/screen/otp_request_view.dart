@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:poc/core/theme/extension.dart';
+import 'package:poc/domain/model/mobile_number.dart';
 import 'package:poc/feature/ui/placeholder/modal_loader.dart';
 import 'package:poc/feature/ui/view/orientation.dart';
 
@@ -33,7 +34,7 @@ class RequestOtpView extends StatelessWidget {
         if (state.uiState is UiSuccess) {
           context.push(
             Routes.otpVerify,
-            extra: "${state.prefix}${state.phone}",
+            extra: MobileNumber(prefix: state.prefix, phoneNumber: state.phone),
           );
         }
       },

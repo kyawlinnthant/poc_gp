@@ -2,7 +2,7 @@ part of 'verify_otp_bloc.dart';
 
 @immutable
 class VerifyOtpState extends Equatable {
-  final String phone;
+  final MobileNumber mobileNumber;
   final String otpCode;
   final String otpCodeError;
   final UiState verifyState;
@@ -10,7 +10,7 @@ class VerifyOtpState extends Equatable {
   final TextEditingController controller;
 
   VerifyOtpState({
-    this.phone = '',
+    this.mobileNumber = const MobileNumber(prefix: '', phoneNumber: ''),
     this.otpCode = '',
     this.otpCodeError = '',
     this.verifyState = const UiIdle(),
@@ -19,7 +19,7 @@ class VerifyOtpState extends Equatable {
   }) : controller = controller ?? TextEditingController();
 
   VerifyOtpState copyWith({
-    String? phone,
+    MobileNumber? mobileNumber,
     String? otpCode,
     String? otpCodeError,
     UiState? verifyState,
@@ -27,7 +27,7 @@ class VerifyOtpState extends Equatable {
     TextEditingController? controller,
   }) {
     return VerifyOtpState(
-      phone: phone ?? this.phone,
+      mobileNumber: mobileNumber ?? this.mobileNumber,
       otpCode: otpCode ?? this.otpCode,
       otpCodeError: otpCodeError ?? this.otpCodeError,
       verifyState: verifyState ?? this.verifyState,
@@ -38,7 +38,7 @@ class VerifyOtpState extends Equatable {
 
   @override
   List<Object?> get props => [
-    phone,
+    mobileNumber,
     otpCode,
     otpCodeError,
     verifyState,

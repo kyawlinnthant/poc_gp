@@ -8,7 +8,6 @@ import 'package:poc/feature/ui/component/password_text_field.dart';
 
 import '../../../../../../core/navigation/routes.dart';
 import '../../../../../../core/theme/dimen.dart';
-import '../../../../../ui/component/phone_text_field.dart';
 import '../../../../../ui/placeholder/modal_loader.dart';
 import '../../../../../ui/prompt/snackbar.dart';
 import '../../../../../ui/spacer/vertical_spacer.dart';
@@ -33,7 +32,8 @@ class SignupView extends StatelessWidget {
           );
         }
         if (state.uiState is UiSuccess) {
-          context.pushReplacement(Routes.landing);
+          // todo : Bug
+          context.pushReplacement(Routes.createPin);
         }
       },
 
@@ -42,6 +42,7 @@ class SignupView extends StatelessWidget {
           isLoading: state.uiState is UiLoading,
           child: Scaffold(
             appBar: AppBar(),
+            resizeToAvoidBottomInset: false,
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: Dimens.paddingBase3x),
               child: Center(
@@ -73,17 +74,7 @@ class SignupView extends StatelessWidget {
                               label: 'emailLabel'.tr(),
                               errorMessage: state.emailError,
                             ),
-                            VerticalSpacer(),
-                            PhoneTextField(
-                              onChanged: (String v) {
-                                context.read<SignupBloc>().add(
-                                  OnUpdatePhone(v),
-                                );
-                              },
-                              onClickPrefix: () {},
-                              errorMessage: state.phoneError,
-                              prefix: state.prefix,
-                            ),
+
                             VerticalSpacer(),
                             PasswordTextField(
                               onChanged: (String value) {
@@ -110,37 +101,40 @@ class SignupView extends StatelessWidget {
                     ),
 
                     SafeArea(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'signupHint'.tr(),
-                                style: context.textStyles.labelSmall,
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'termsCondition'.tr(),
-                                  style: context.textStyles.labelMedium
-                                      ?.copyWith(color: context.colors.error),
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: Dimens.paddingBase),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'signupHint'.tr(),
+                                  style: context.textStyles.labelSmall,
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: double.maxFinite,
-                            child: FilledButton(
-                              onPressed: () {
-                                context.read<SignupBloc>().add(
-                                  OnSignupPressed(),
-                                );
-                              },
-                              child: Text('signup'.tr()),
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'termsCondition'.tr(),
+                                    style: context.textStyles.labelMedium
+                                        ?.copyWith(color: context.colors.error),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: double.maxFinite,
+                              child: FilledButton(
+                                onPressed: () {
+                                  context.read<SignupBloc>().add(
+                                    OnSignupPressed(),
+                                  );
+                                },
+                                child: Text('signup'.tr()),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

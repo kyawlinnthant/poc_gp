@@ -3,18 +3,20 @@ part of 'signup_bloc.dart';
 @immutable
 sealed class SignupEvent {}
 
+final class OnSetMobile extends SignupEvent {
+  final MobileNumber mobileNumber;
+
+  OnSetMobile(this.mobileNumber);
+}
+
 final class OnSignupPressed extends SignupEvent {}
+
+final class OnSignupInit extends SignupEvent {}
 
 final class OnUpdateEmail extends SignupEvent {
   final String email;
 
   OnUpdateEmail(this.email);
-}
-
-final class OnUpdatePhone extends SignupEvent {
-  final String phone;
-
-  OnUpdatePhone(this.phone);
 }
 
 final class OnUpdatePassword extends SignupEvent {

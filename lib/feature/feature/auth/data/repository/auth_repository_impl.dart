@@ -1,6 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:poc/data/device_info/device_info.dart';
 import 'package:poc/data/network/resource/success_response.dart';
+import 'package:poc/data/store/app_data/app_launch_mode.dart';
 import 'package:poc/data/store/user_data/app_user_store.dart';
+import 'package:poc/data/store/user_data/user_data.dart';
+import 'package:poc/feature/feature/auth/data/dto/register_dto.dart';
 
 import '../../../../../data/network/resource/network_resource.dart';
 import '../../../../../data/store/app_data/app_data_store.dart';
@@ -14,12 +18,14 @@ class AuthRepositoryImpl extends AuthRepository {
   final AppUserStore appUserStore;
   final AppKeyStore appKeyStore;
   final AppDataStore appDataStore;
+  final DeviceInfoRepository deviceInfo;
 
   AuthRepositoryImpl({
     required this.appUserStore,
     required this.appKeyStore,
     required this.appDataStore,
     required this.apiService,
+    required this.deviceInfo,
   });
 
   // Auth
@@ -127,28 +133,57 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<NetworkResource<bool>> register({
-    required String country,
-    required String firstname,
-    required String lastname,
-    required String mobileNumber,
-    required String email,
+    required String prefix,
+    required String phone,
     required String password,
-    required String confirmPassword,
+    required String email,
   }) async {
+    // todo:
+    await Future.delayed(Duration(seconds: 2));
+    await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.createPin);
+    return NetworkSuccess(data: true);
+
+    String brand = await deviceInfo.getDeviceBrand();
+    String deviceUniqueId = await deviceInfo.getDeviceUniqueId();
+    String osVersion = await deviceInfo.getDeviceOsVersion();
+    String deviceModel = await deviceInfo.getDeviceModel();
+    String deviceManufacturer = await deviceInfo.getDeviceManufacturer();
+
     final response = await apiService.register(
-      country: country,
-      firstName: firstname,
-      lastName: lastname,
-      phoneNo: mobileNumber,
-      email: email,
+      prefix: prefix,
+      phone: phone,
       password: password,
-      confirmPassword: confirmPassword,
+      email: email,
+      longitude: '',
+      latitude: '',
+      appVersion: '001',
+      ipAddress: '',
+      brand: brand,
+      deviceUniqueId: deviceUniqueId,
+      osVersion: osVersion,
+      deviceModel: deviceModel,
+      deviceManufacturer: deviceManufacturer,
     );
     switch (response) {
-      case NetworkSuccess<bool>():
-        return NetworkSuccess(data: true);
-      case NetworkFailed<bool>():
+      case NetworkSuccess<RegisterDto>():
+        final successResponse = response.data?.data;
+        if (successResponse != null) {
+          final userData = toUserData(dto: successResponse, password: password);
+          await appUserStore.saveUserData(userData);
+          await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.createPin);
+          final token = successResponse.accessToken ?? '';
+          await appKeyStore.saveAccessToken(token);
+          return NetworkSuccess(data: token.isNotEmpty);
+        } else {
+          return NetworkFailed(message: 'somethingWentWrong'.tr());
+        }
+      case NetworkFailed<RegisterDto>():
         return NetworkFailed(message: response.message);
     }
+  }
+
+  @override
+  Future<UserData?> getUserData() async {
+    return await appUserStore.getUserData();
   }
 }

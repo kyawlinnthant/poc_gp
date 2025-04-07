@@ -27,6 +27,11 @@
   "signupHint" : "By clicking on Signup, you agree to",
   "termsCondition" : "Terms & Conditions",
 
+  "createPinTitle": "Create Wallet PIN",
+  "createPinDescription": "Create a SECURE PIN to keep your e-wallet and\ntransaction safe from any unauthorized access.",
+
+  "confirmPinTitle": "Re-Enter Wallet PIN",
+
   "haveAccount" : "Have Account?",
   "newUser": "New User?",
   "privacyPolicy": "Privacy Policy",

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:poc/data/device_info/device_info.dart';
 import 'package:poc/data/store/app_data/app_data_store.dart';
 import 'package:poc/data/store/keys_data/app_key_store.dart';
 import 'package:poc/data/store/user_data/app_user_store.dart';
@@ -14,6 +15,10 @@ void setupDi() {
   getIt.registerLazySingleton<AppUserStore>(() => AppUserStore());
 
   getIt.registerLazySingleton<DioClient>(() => DioClient());
+
+  getIt.registerLazySingleton<DeviceInfoRepository>(
+    () => DeviceInfoRepository(),
+  );
 
   provideAuthDi();
 }

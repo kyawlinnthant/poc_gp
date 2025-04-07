@@ -1,3 +1,4 @@
+import 'package:poc/data/device_info/device_info.dart';
 import 'package:poc/data/store/app_data/app_data_store.dart';
 import 'package:poc/data/store/keys_data/app_key_store.dart';
 import 'package:poc/data/store/user_data/app_user_store.dart';
@@ -11,7 +12,6 @@ import 'package:poc/feature/feature/auth/presentation/signup/bloc/signup_bloc.da
 import '../../../../../core/di/di.dart';
 import '../../../../../data/network/dio_client.dart';
 import '../../presentation/login/bloc/login_bloc.dart';
-import '../../presentation/otp_verify/resend/resend_cubit.dart';
 
 void provideAuthDi() {
   getIt.registerLazySingleton<AuthApiService>(
@@ -24,6 +24,7 @@ void provideAuthDi() {
       appUserStore: getIt<AppUserStore>(),
       appKeyStore: getIt<AppKeyStore>(),
       appDataStore: getIt<AppDataStore>(),
+      deviceInfo: getIt<DeviceInfoRepository>(),
     ),
   );
   _provideAuthBloc();

@@ -1,10 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:poc/core/theme/extension.dart';
 import 'package:poc/feature/feature/auth/presentation/otp_verify/bloc/verify_otp_bloc.dart';
 
+import '../../../../../../core/navigation/routes.dart';
 import '../../../../../../core/theme/dimen.dart';
+import '../../../../../../domain/model/mobile_number.dart';
 import '../../../../../ui/component/pin_text_field.dart';
 import '../../../../../ui/placeholder/modal_loader.dart';
 import '../../../../../ui/prompt/snackbar.dart';
@@ -32,7 +35,13 @@ class VerifyOtpView extends StatelessWidget {
           );
         }
         if (state.verifyState is UiSuccess) {
-          // context.push(Routes.landing);
+          context.push(
+            Routes.register,
+            extra: MobileNumber(
+              prefix: state.mobileNumber.prefix,
+              phoneNumber: state.mobileNumber.phoneNumber,
+            ),
+          );
         }
         if (state.resendState is UiError) {
           showSnackBar(

@@ -5,8 +5,10 @@ class Routes {
   // auth
   static const String login = '/login';
   static const String otpRequest = '/otpRequest';
-  static const String otpVerify = '/otpVerify/:${RouteParams.phone}';
-  static const String register = '/register';
+  static const String otpVerify = '/otpVerify/:${RouteParams.mobile}';
+  static const String register = '/register/:${RouteParams.mobile}';
+  static const String createPin = '/createPin';
+  static const String confirmPin = '/confirmPin';
   static const String forgotPassword = '/forgotPassword';
   static const String helpCenter = '/help';
 
@@ -15,5 +17,5 @@ class Routes {
 }
 
 class RouteParams {
-  static const String phone = "phone";
+  static const String mobile = "mobile";
 }

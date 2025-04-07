@@ -13,7 +13,7 @@ import '../../../data/store/app_data/app_language.dart';
 
 void saveAppLaunchState() async {
   final appDataStore = getIt.get<AppDataStore>();
-  await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.auth);
+  await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.login);
 }
 
 class OnBoardScreen extends StatefulWidget {

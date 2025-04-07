@@ -5,6 +5,7 @@ import 'package:poc/data/network/resource/success_response.dart';
 import '../../../../../data/network/dio_client.dart';
 import '../../../../../data/network/resource/network_resource.dart';
 import '../dto/login_dto.dart';
+import '../dto/register_dto.dart';
 
 class AuthApiService {
   final DioClient dioClient;
@@ -72,34 +73,44 @@ class AuthApiService {
     );
   }
 
-  Future<NetworkResource<bool>> register({
-    required String country,
-    required String firstName,
-    required String lastName,
-    required String phoneNo,
-    required String email,
+  Future<NetworkResource<RegisterDto>> register({
+    required String prefix,
+    required String phone,
     required String password,
-    required String confirmPassword,
+    required String email,
+    required String longitude,
+    required String latitude,
+    required String appVersion,
+    required String ipAddress,
+    required String brand,
+    required String deviceUniqueId,
+    required String osVersion,
+    required String deviceModel,
+    required String deviceManufacturer,
   }) async {
-    return await safeApiCall<bool>(
+    return await safeApiCall<RegisterDto>(
       dioRequest: dioClient.post(
         '/api/Account/Register',
         data: {
-          'AccountConfirmUrl':
-              'https://destinyx.joeyyap.com/Account/Confirm.aspx',
-          'Country': country,
-          'FirstName': firstName,
-          'LastName': lastName,
-          'PhoneNo': phoneNo,
-          'Email': email,
+          'UserName': "$prefix$phone",
           'Password': password,
-          'ConfirmPassword': confirmPassword,
+          'Email': email,
+          'CountryPINCode': "+$prefix",
+          'Country': '+60',
+          'FullName': 'KLT',
+          'Longtitude': longitude,
+          'Latitude': latitude,
+          'appversion': appVersion,
+          'IpAddress': '',
+          'brand': brand,
+          'DeviceUniqueId': deviceUniqueId,
+          'osversion': osVersion,
+          'DeviceModel': deviceModel,
+          'manufacturer': deviceManufacturer,
         },
         options: Options(contentType: Headers.jsonContentType),
       ),
-      fromJson: (json) {
-        return true;
-      },
+      fromJson: (json) => RegisterDto.fromJson(json),
     );
   }
 }

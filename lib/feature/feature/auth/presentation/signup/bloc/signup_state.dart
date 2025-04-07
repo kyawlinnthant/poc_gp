@@ -3,66 +3,62 @@ part of 'signup_bloc.dart';
 @immutable
 class SignupState extends Equatable {
   final String email;
-  final String prefix;
-  final String phone;
+  final MobileNumber mobileNumber;
   final String password;
   final String confirmPassword;
   final String emailError;
-  final String phoneError;
   final String passwordError;
   final String confirmPasswordError;
   final UiState uiState;
 
+  final bool alreadyRegistered;
+
   const SignupState({
     this.email = '',
-    this.prefix = '60',
-    this.phone = '',
+    this.mobileNumber = const MobileNumber(prefix: '', phoneNumber: ''),
     this.password = '',
     this.confirmPassword = '',
     this.emailError = '',
-    this.phoneError = '',
     this.passwordError = '',
     this.confirmPasswordError = '',
     this.uiState = const UiIdle(),
+    this.alreadyRegistered = false,
   });
 
   SignupState copyWith({
     String? email,
-    String? prefix,
-    String? phone,
+    MobileNumber? mobileNumber,
     String? password,
     String? confirmPassword,
     String? emailError,
-    String? phoneError,
     String? passwordError,
     String? confirmPasswordError,
     UiState? uiState,
+    bool? alreadyRegistered,
   }) {
     return SignupState(
       email: email ?? this.email,
-      prefix: prefix ?? this.prefix,
-      phone: phone ?? this.phone,
+      mobileNumber: mobileNumber ?? this.mobileNumber,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       emailError: emailError ?? this.emailError,
-      phoneError: phoneError ?? this.phoneError,
       passwordError: passwordError ?? this.passwordError,
       confirmPasswordError: confirmPasswordError ?? this.confirmPasswordError,
       uiState: uiState ?? this.uiState,
+      alreadyRegistered: alreadyRegistered ?? this.alreadyRegistered,
     );
   }
 
   @override
   List<Object?> get props => [
     email,
-    prefix,
-    phone,
+    mobileNumber,
     password,
     confirmPassword,
     emailError,
-    phoneError,
     passwordError,
     confirmPasswordError,
     uiState,
+    alreadyRegistered,
   ];
 }
