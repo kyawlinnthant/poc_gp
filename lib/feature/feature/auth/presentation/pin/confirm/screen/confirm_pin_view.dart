@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:poc/core/navigation/routes.dart';
 import 'package:poc/core/theme/extension.dart';
 import 'package:poc/feature/feature/auth/presentation/pin/confirm/bloc/confirm_pin_bloc.dart';
+import 'package:poc/feature/feature/auth/presentation/pin/create/bloc/create_pin_bloc.dart';
 
 import '../../../../../../../core/theme/alpha.dart';
 import '../../../../../../../core/theme/dimen.dart';
@@ -30,14 +31,15 @@ class ConfirmPinView extends StatelessWidget {
             context: context,
             message: (state.uiState as UiError).message,
           );
+          context.read<ConfirmPinBloc>().add(OnResetUiStateConfirmPin());
         }
         if (state.uiState is UiSuccess) {
-          context.pushReplacement(Routes.landing);
+          context.go(Routes.landing);
         }
       },
       builder: (context, state) {
         return ModalLoaderPlaceholder(
-          isLoading: false,
+          isLoading: state.uiState is UiLoading,
           child: Scaffold(
             appBar: AppBar(),
             resizeToAvoidBottomInset: false,
@@ -104,7 +106,7 @@ class ConfirmPinView extends StatelessWidget {
                           onPressed: () {
                             context.read<ConfirmPinBloc>().add(
                               OnUpdateConfirmPin(
-                                state.confirmPin + (i + 1).toString(),
+                                state.confirmPin.trim() + (i + 1).toString(),
                               ),
                             );
                           },
@@ -115,20 +117,22 @@ class ConfirmPinView extends StatelessWidget {
                         number: '0',
                         onPressed: () {
                           context.read<ConfirmPinBloc>().add(
-                            OnUpdateConfirmPin('${state.confirmPin}0'),
+                            OnUpdateConfirmPin('${state.confirmPin.trim()}0'),
                           );
                         },
                       ),
                       PinBackButton(
                         onPressed: () {
-                          context.read<ConfirmPinBloc>().add(
-                            OnUpdateConfirmPin(
-                              state.confirmPin.substring(
-                                0,
-                                state.confirmPin.length - 1,
+                          if (state.confirmPin.trim().isNotEmpty) {
+                            context.read<ConfirmPinBloc>().add(
+                              OnUpdateConfirmPin(
+                                state.confirmPin.trim().substring(
+                                  0,
+                                  state.confirmPin.trim().length - 1,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          }
                         },
                       ),
                     ],

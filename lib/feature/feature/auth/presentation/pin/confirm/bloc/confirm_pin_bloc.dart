@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:poc/data/network/resource/network_resource.dart';
@@ -24,11 +25,17 @@ class ConfirmPinBloc extends Bloc<ConfirmPinEvent, ConfirmPinState> {
           await _fetchCreatePin(emit);
         case OnSetPin():
           emit(state.copyWith(pin: event.pin));
+        case OnResetUiStateConfirmPin():
+          emit(state.copyWith(uiState: UiIdle()));
       }
     });
   }
 
   Future<void> _fetchCreatePin(Emitter<ConfirmPinState> emit) async {
+    if (state.pin.trim() != state.confirmPin.trim()) {
+      emit(state.copyWith(uiState: UiError('pinNotMatch'.tr())));
+      return;
+    }
     emit(state.copyWith(uiState: UiLoading()));
     final response = await repository.createPin(pin: state.pin);
     switch (response) {

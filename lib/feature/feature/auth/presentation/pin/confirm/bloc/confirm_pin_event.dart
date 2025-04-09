@@ -16,3 +16,5 @@ final class OnUpdateConfirmPin extends ConfirmPinEvent {
 }
 
 final class OnFetchCreatePin extends ConfirmPinEvent {}
+
+final class OnResetUiStateConfirmPin extends ConfirmPinEvent {}

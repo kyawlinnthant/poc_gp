@@ -56,5 +56,6 @@
   "verifyNumber": "Verify Number",
   "notReceiveIt" : "Didn't receive it?",
   "resend" : "Resend",
-  "resendCode" : "Resend again in :"
+  "resendCode" : "Resend again in :",
+  "pinNotMatch" : "PIN does not match"
 }

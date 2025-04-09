@@ -10,3 +10,7 @@ final class OnUpdatePin extends CreatePinEvent {
 }
 
 final class OnCompleteCreatePin extends CreatePinEvent {}
+
+final class OnResetCreatePin extends CreatePinEvent {}
+
+final class OnResetUiStateCreatePin extends CreatePinEvent {}

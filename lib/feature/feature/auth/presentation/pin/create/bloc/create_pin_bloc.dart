@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../../ui/state/ui_state.dart';
@@ -16,11 +17,15 @@ class CreatePinBloc extends Bloc<CreatePinEvent, CreatePinState> {
       switch (event) {
         case OnUpdatePin():
           emit(state.copyWith(pin: event.pin));
-          if (event.pin.length == 6) {
+          if (event.pin.trim().length == 6) {
             await _onNext(emit);
           }
         case OnCompleteCreatePin():
           await _onNext(emit);
+        case OnResetCreatePin():
+          emit(state.copyWith(pin: '', uiState: UiIdle()));
+        case OnResetUiStateCreatePin():
+          emit(state.copyWith(uiState: UiIdle()));
       }
     });
   }

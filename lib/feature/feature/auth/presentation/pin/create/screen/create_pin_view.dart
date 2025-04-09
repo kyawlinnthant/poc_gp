@@ -30,10 +30,11 @@ class CreatePinView extends StatelessWidget {
             context: context,
             message: (state.uiState as UiError).message,
           );
+          context.read<CreatePinBloc>().add(OnResetUiStateCreatePin());
         }
         if (state.uiState is UiSuccess) {
           context.push(Routes.confirmPin, extra: state.pin);
-          context.read<CreatePinBloc>().add(OnUpdatePin(''));
+          context.read<CreatePinBloc>().add(OnResetCreatePin());
         }
       },
       builder: (context, state) {
@@ -104,7 +105,9 @@ class CreatePinView extends StatelessWidget {
                           number: (i + 1).toString(),
                           onPressed: () {
                             context.read<CreatePinBloc>().add(
-                              OnUpdatePin(state.pin + (i + 1).toString()),
+                              OnUpdatePin(
+                                state.pin.trim() + (i + 1).toString(),
+                              ),
                             );
                           },
                         ),
@@ -114,17 +117,22 @@ class CreatePinView extends StatelessWidget {
                         number: '0',
                         onPressed: () {
                           context.read<CreatePinBloc>().add(
-                            OnUpdatePin('${state.pin}0'),
+                            OnUpdatePin('${state.pin.trim()}0'),
                           );
                         },
                       ),
                       PinBackButton(
                         onPressed: () {
-                          context.read<CreatePinBloc>().add(
-                            OnUpdatePin(
-                              state.pin.substring(0, state.pin.length - 1),
-                            ),
-                          );
+                          if (state.pin.trim().isNotEmpty) {
+                            context.read<CreatePinBloc>().add(
+                              OnUpdatePin(
+                                state.pin.trim().substring(
+                                  0,
+                                  state.pin.trim().length - 1,
+                                ),
+                              ),
+                            );
+                          }
                         },
                       ),
                     ],
