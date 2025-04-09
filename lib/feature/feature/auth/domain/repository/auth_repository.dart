@@ -2,7 +2,6 @@ import 'package:poc/data/store/user_data/user_data.dart';
 
 import '../../../../../data/network/resource/network_resource.dart';
 import '../../data/dto/login_dto.dart';
-import '../../data/dto/register_dto.dart';
 
 abstract class AuthRepository {
   // Auth
@@ -32,6 +31,8 @@ abstract class AuthRepository {
     required String password,
     required String email,
   });
+
+  Future<NetworkResource<bool>> createPin({required String pin});
 
   Future<UserData?> getUserData();
 }

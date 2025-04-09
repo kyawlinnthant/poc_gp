@@ -8,7 +8,7 @@ class Routes {
   static const String otpVerify = '/otpVerify/:${RouteParams.mobile}';
   static const String register = '/register/:${RouteParams.mobile}';
   static const String createPin = '/createPin';
-  static const String confirmPin = '/confirmPin';
+  static const String confirmPin = '/confirmPin/:${RouteParams.oldPin}';
   static const String forgotPassword = '/forgotPassword';
   static const String helpCenter = '/help';
 
@@ -18,4 +18,5 @@ class Routes {
 
 class RouteParams {
   static const String mobile = "mobile";
+  static const String oldPin = "oldPin";
 }

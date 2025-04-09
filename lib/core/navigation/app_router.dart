@@ -3,13 +3,13 @@ import 'package:poc/core/navigation/routes.dart';
 import 'package:poc/domain/model/mobile_number.dart';
 import 'package:poc/feature/feature/auth/presentation/otp_request/screen/otp_request_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/otp_verify/screen/verify_otp_screen.dart';
-import 'package:poc/feature/feature/auth/presentation/pin/create/create_pin_view.dart';
+import 'package:poc/feature/feature/auth/presentation/pin/confirm/screen/confirm_pin_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/pin/create/screen/create_pin_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
 import '../../data/store/app_data/app_launch_mode.dart';
 import '../../feature/feature/auth/presentation/forgot_password/forgot_password_screen.dart';
 import '../../feature/feature/auth/presentation/login/screen/login_screen.dart';
-import '../../feature/feature/auth/presentation/pin/confirm/confirm_pin_view.dart';
 import '../../feature/feature/auth/presentation/privacy_terms/privacy_terms_screen.dart';
 import '../../feature/feature/auth/presentation/signup/screen/signup_screen.dart';
 import '../../feature/feature/landing/landing_screen.dart';
@@ -44,11 +44,14 @@ final GoRouter appNavigator = GoRouter(
     ),
     GoRoute(
       path: Routes.createPin,
-      builder: (context, state) => CreatePinView(),
+      builder: (context, state) => CreatePinScreen(),
     ),
     GoRoute(
       path: Routes.confirmPin,
-      builder: (context, state) => ConfirmPinView(),
+      builder: (context, state) {
+        final pin = state.extra as String;
+        return ConfirmPinScreen(pin: pin);
+      },
     ),
     GoRoute(
       path: Routes.forgotPassword,

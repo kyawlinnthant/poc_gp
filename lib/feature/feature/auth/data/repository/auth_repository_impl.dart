@@ -186,4 +186,12 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<UserData?> getUserData() async {
     return await appUserStore.getUserData();
   }
+
+  @override
+  Future<NetworkResource<bool>> createPin({required String pin}) async {
+    // todo:
+    await Future.delayed(Duration(seconds: 2));
+    await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.landing);
+    return NetworkSuccess(data: true);
+  }
 }

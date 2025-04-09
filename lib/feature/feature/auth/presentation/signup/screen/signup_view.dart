@@ -32,7 +32,6 @@ class SignupView extends StatelessWidget {
           );
         }
         if (state.uiState is UiSuccess) {
-          // todo : Bug
           context.pushReplacement(Routes.createPin);
         }
       },
