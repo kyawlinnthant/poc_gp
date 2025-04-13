@@ -28,9 +28,9 @@ class AuthRepositoryImpl extends AuthRepository {
     required this.deviceInfo,
   });
 
-  // Auth
+  // signup
   @override
-  Future<NetworkResource<bool>> requestOtp({
+  Future<NetworkResource<bool>> requestOtpSignup({
     required String phone,
     required String authId,
   }) async {
@@ -56,7 +56,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<NetworkResource<bool>> verifyOtp({
+  Future<NetworkResource<bool>> verifyOtpSignup({
     required String phone,
     required String otp,
   }) async {
@@ -79,7 +79,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<NetworkResource<bool>> resentOtp({
+  Future<NetworkResource<bool>> resentOtpSignup({
     required String phone,
     required String authId,
   }) async {
@@ -102,33 +102,6 @@ class AuthRepositoryImpl extends AuthRepository {
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
     }
-  }
-
-  @override
-  Future<NetworkResource<LoginDto>> login({
-    required String phone,
-    required String password,
-  }) async {
-    // todo:
-    await Future.delayed(Duration(seconds: 2));
-
-    return NetworkFailed(message: "Something went wrong!");
-
-    final response = await apiService.login(
-      username: phone,
-      password: password,
-    );
-
-    if (response is NetworkSuccess<LoginDto>) {
-      final data = response.data!;
-      if (data.accessToken.isNotEmpty) {
-        // await prefService.setToken(token: data.accessToken);
-        // await prefService.setUsername(name: data.username);
-        // await prefService.setEmail(email: data.email);
-        // await prefService.setIsAuthenticated(true);
-      }
-    }
-    return response;
   }
 
   @override
@@ -182,16 +155,76 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
+  // password
+
   @override
-  Future<UserData?> getUserData() async {
-    return await appUserStore.getUserData();
+  Future<NetworkResource<bool>> requestOtpPassword({
+    required String phone,
+    required String authId,
+  }) async {
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
   }
 
   @override
-  Future<NetworkResource<bool>> createPin({required String pin}) async {
+  Future<NetworkResource<bool>> resentOtpPassword({
+    required String phone,
+    required String authId,
+  }) async {
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+  }
+
+  @override
+  Future<NetworkResource<bool>> resetPassword({
+    required String prefix,
+    required String phone,
+    required String password,
+  }) async {
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+  }
+
+  @override
+  Future<NetworkResource<bool>> verifyOtpPassword({
+    required String phone,
+    required String otp,
+  }) async {
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+  }
+
+  // login
+  @override
+  Future<NetworkResource<LoginDto>> login({
+    required String phone,
+    required String password,
+  }) async {
     // todo:
     await Future.delayed(Duration(seconds: 2));
-    await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.landing);
-    return NetworkSuccess(data: true);
+
+    return NetworkFailed(message: "Something went wrong!");
+
+    final response = await apiService.login(
+      username: phone,
+      password: password,
+    );
+
+    if (response is NetworkSuccess<LoginDto>) {
+      final data = response.data!;
+      if (data.accessToken.isNotEmpty) {
+        // await prefService.setToken(token: data.accessToken);
+        // await prefService.setUsername(name: data.username);
+        // await prefService.setEmail(email: data.email);
+        // await prefService.setIsAuthenticated(true);
+      }
+    }
+    return response;
+  }
+
+  // store
+  @override
+  Future<UserData?> getUserData() async {
+    return await appUserStore.getUserData();
   }
 }

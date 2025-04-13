@@ -87,7 +87,7 @@ class LoginView extends StatelessWidget {
                         width: double.maxFinite,
                         child: TextButton(
                           onPressed: () {
-                            context.push(Routes.forgotPassword);
+                            context.push(Routes.forgotPwdOTPRequest);
                           },
                           child: Text('forgotPassword'.tr()),
                         ),
@@ -105,7 +105,7 @@ class LoginView extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                context.push(Routes.otpRequest);
+                                context.push(Routes.signupOTPRequest);
                               },
                               child: Text('signup'.tr()),
                             ),

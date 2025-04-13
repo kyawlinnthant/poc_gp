@@ -19,7 +19,7 @@ class AuthApiService {
   }) async {
     return safeApiCall<SuccessResponse>(
       dioRequest: dioClient.post(
-        '/api/account/v3/user-register-v1-send-otp',
+        '/api/account/v3/user-register-v1-send-request',
         data: {'UserName': username, 'AuthId': authId},
         options: Options(contentType: Headers.jsonContentType),
       ),
@@ -33,7 +33,7 @@ class AuthApiService {
   }) async {
     return safeApiCall<SuccessResponse>(
       dioRequest: dioClient.post(
-        '/api/account/v3/user-register-verify-otp',
+        '/api/account/v3/user-register-verify-request',
         data: {'UserName': username, 'Otp': otp},
         options: Options(contentType: Headers.jsonContentType),
       ),
@@ -47,7 +47,7 @@ class AuthApiService {
   }) async {
     return safeApiCall<SuccessResponse>(
       dioRequest: dioClient.post(
-        '/api/account/v3/user-register-v1-send-otp',
+        '/api/account/v3/user-register-v1-send-request',
         data: {'UserName': username, 'AuthId': authId},
         options: Options(contentType: Headers.jsonContentType),
       ),

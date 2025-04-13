@@ -6,7 +6,7 @@ import 'package:poc/data/store/app_data/app_language.dart';
 
 import 'data/store/app_data/app_data_store.dart';
 import 'feature/app/application.dart';
-import 'feature/feature/auth/presentation/otp_verify/resend/resend_cubit.dart';
+import 'feature/feature/common/otp_resend/resend_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

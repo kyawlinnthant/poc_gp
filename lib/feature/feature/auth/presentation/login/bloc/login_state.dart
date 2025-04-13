@@ -10,7 +10,7 @@ class LoginState extends Equatable {
   final UiState uiState;
 
   const LoginState({
-    this.prefix = '60',
+    this.prefix = AppConstant.defaultPrefix,
     this.phone = '',
     this.password = '',
     this.phoneError = '',

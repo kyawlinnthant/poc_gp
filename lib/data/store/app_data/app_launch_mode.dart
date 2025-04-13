@@ -1,4 +1,4 @@
-enum AppLaunchMode { onboard, login, createPin, landing }
+enum AppLaunchMode { onboard, login, createPin, eKyc, landing }
 
 extension AppLaunchModeExtension on AppLaunchMode {
   String get appLaunchMode {
@@ -11,6 +11,8 @@ extension AppLaunchModeExtension on AppLaunchMode {
         return 'createPin';
       case AppLaunchMode.landing:
         return 'landing';
+      case AppLaunchMode.eKyc:
+        return 'eKyc';
     }
   }
 
@@ -22,6 +24,8 @@ extension AppLaunchModeExtension on AppLaunchMode {
         return AppLaunchMode.login;
       case 'createPin':
         return AppLaunchMode.createPin;
+      case 'eKyc':
+        return AppLaunchMode.eKyc;
       case 'landing':
         return AppLaunchMode.landing;
       default:

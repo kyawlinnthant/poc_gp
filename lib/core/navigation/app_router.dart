@@ -1,19 +1,21 @@
 import 'package:go_router/go_router.dart';
 import 'package:poc/core/navigation/routes.dart';
 import 'package:poc/domain/model/mobile_number.dart';
-import 'package:poc/feature/feature/auth/presentation/otp_request/screen/otp_request_screen.dart';
-import 'package:poc/feature/feature/auth/presentation/otp_verify/screen/verify_otp_screen.dart';
-import 'package:poc/feature/feature/auth/presentation/pin/confirm/screen/confirm_pin_screen.dart';
-import 'package:poc/feature/feature/auth/presentation/pin/create/screen/create_pin_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/password/otp/request/screen/otp_request_password_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/password/reset/screen/reset_pwd_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/signup/register/screen/register_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
 import '../../data/store/app_data/app_launch_mode.dart';
-import '../../feature/feature/auth/presentation/forgot_password/forgot_password_screen.dart';
 import '../../feature/feature/auth/presentation/login/screen/login_screen.dart';
+import '../../feature/feature/auth/presentation/password/otp/verify/screen/otp_verify_password_screen.dart';
 import '../../feature/feature/auth/presentation/privacy_terms/privacy_terms_screen.dart';
-import '../../feature/feature/auth/presentation/signup/screen/signup_screen.dart';
+import '../../feature/feature/auth/presentation/signup/otp/request/screen/otp_request_signup_screen.dart';
+import '../../feature/feature/auth/presentation/signup/otp/verify/screen/otp_verify_screen.dart';
 import '../../feature/feature/landing/landing_screen.dart';
 import '../../feature/feature/onboard/onboard_screen.dart';
+import '../../feature/feature/pin/presentation/confirm/screen/confirm_pin_screen.dart';
+import '../../feature/feature/pin/presentation/create/screen/create_pin_screen.dart';
 import '../di/di.dart';
 
 final GoRouter appNavigator = GoRouter(
@@ -24,24 +26,48 @@ final GoRouter appNavigator = GoRouter(
     // AUTH
     GoRoute(path: Routes.login, builder: (context, state) => LoginScreen()),
     GoRoute(
-      path: Routes.otpRequest,
-      builder: (context, state) => RequestOtpScreen(),
+      path: Routes.helpCenter,
+      builder: (context, state) => PrivacyTermsScreen(),
+    ),
+    // signup
+    GoRoute(
+      path: Routes.signupOTPRequest,
+      builder: (context, state) => OtpRequestSignupScreen(),
     ),
     GoRoute(
-      path: Routes.otpVerify,
+      path: Routes.signupOTPVerify,
       builder: (context, state) {
         final phone = state.extra as MobileNumber;
-        return VerifyOtpScreen(mobileNumber: phone);
+        return OtpVerifySignupScreen(mobileNumber: phone);
       },
     ),
-
     GoRoute(
       path: Routes.register,
       builder: (context, state) {
         final phone = state.extra as MobileNumber;
-        return SignupScreen(mobileNumber: phone);
+        return RegisterScreen(mobileNumber: phone);
       },
     ),
+    // password
+    GoRoute(
+      path: Routes.forgotPwdOTPRequest,
+      builder: (context, state) => OtpRequestPasswordScreen(),
+    ),
+    GoRoute(
+      path: Routes.forgotPwdOTPVerify,
+      builder: (context, state) {
+        final phone = state.extra as MobileNumber;
+        return OtpVerifyPasswordScreen(mobileNumber: phone);
+      },
+    ),
+    GoRoute(
+      path: Routes.resetPwd,
+      builder: (context, state) {
+        final phone = state.extra as MobileNumber;
+        return ResetPasswordScreen(mobileNumber: phone);
+      },
+    ),
+    // PIN
     GoRoute(
       path: Routes.createPin,
       builder: (context, state) => CreatePinScreen(),
@@ -53,15 +79,7 @@ final GoRouter appNavigator = GoRouter(
         return ConfirmPinScreen(pin: pin);
       },
     ),
-    GoRoute(
-      path: Routes.forgotPassword,
-      builder: (context, state) => ForgotPasswordScreen(),
-    ),
-    GoRoute(
-      path: Routes.helpCenter,
-      builder: (context, state) => PrivacyTermsScreen(),
-    ),
-    // Home Flow
+    // HOME
     GoRoute(path: Routes.landing, builder: (context, state) => LandingScreen()),
   ],
 
@@ -72,6 +90,7 @@ final GoRouter appNavigator = GoRouter(
       Routes.onboard,
       Routes.login,
       Routes.createPin,
+      Routes.eKycIntro,
       Routes.landing,
     ];
 
@@ -86,6 +105,10 @@ final GoRouter appNavigator = GoRouter(
     if (launchMode == AppLaunchMode.createPin &&
         mainRoutes.contains(state.matchedLocation)) {
       return Routes.createPin;
+    }
+    if (launchMode == AppLaunchMode.eKyc &&
+        mainRoutes.contains(state.matchedLocation)) {
+      return Routes.eKycIntro;
     }
     if (launchMode == AppLaunchMode.landing &&
         mainRoutes.contains(state.matchedLocation)) {

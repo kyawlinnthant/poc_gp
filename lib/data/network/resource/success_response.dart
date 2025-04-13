@@ -2,7 +2,7 @@
 * {
     "success": true,
     "data": true,
-    "code": "user-register-verify-otp",
+    "code": "user-register-verify-request",
     "message": null
 }
 * */

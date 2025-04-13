@@ -1,6 +1,6 @@
 /*
 {
-    "Code": "user-register-send-otp",
+    "Code": "user-register-send-request",
     "Message": "Invalid mobile number"
 }
 */

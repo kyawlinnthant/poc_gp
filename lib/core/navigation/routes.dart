@@ -2,15 +2,34 @@ class Routes {
   // onboard
   static const String onboard = '/onboard';
 
-  // auth
+  // auth - login
   static const String login = '/login';
-  static const String otpRequest = '/otpRequest';
-  static const String otpVerify = '/otpVerify/:${RouteParams.mobile}';
+
+  // auth - signup
+  static const String signupOTPRequest = '/otpRequestSignup';
+  static const String signupOTPVerify =
+      '/otpVerifySignup/:${RouteParams.mobile}';
   static const String register = '/register/:${RouteParams.mobile}';
+
+  // auth - password
+  static const String forgotPwdOTPRequest = '/otpRequestPwd';
+  static const String forgotPwdOTPVerify =
+      '/otpVerifyPwd/:${RouteParams.mobile}';
+  static const String resetPwd = '/resetPwd/:${RouteParams.mobile}';
+
+  // auth - help
+  static const String helpCenter = '/help';
+
+  // pin
   static const String createPin = '/createPin';
   static const String confirmPin = '/confirmPin/:${RouteParams.oldPin}';
-  static const String forgotPassword = '/forgotPassword';
-  static const String helpCenter = '/help';
+
+  // e-kyc
+  static const String eKycIntro = '/eKycIntro';
+  static const String eKycFlow = '/eKycFlow';
+  static const String eKycChooseType = '/eKycType';
+  static const String eKycSelfieTake = '/eKycSelfieTake';
+  static const String eKycSelfieConfirm = '/eKycSelfieConfirm';
 
   // landing
   static const String landing = '/';
