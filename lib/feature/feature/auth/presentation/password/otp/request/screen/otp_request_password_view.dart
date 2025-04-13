@@ -30,7 +30,7 @@ class OtpRequestPasswordView extends StatelessWidget {
         }
         if (state.uiState is UiSuccess) {
           context.push(
-            Routes.signupOTPVerify,
+            Routes.forgotPwdOTPVerify,
             extra: MobileNumber(prefix: state.prefix, phoneNumber: state.phone),
           );
           context.read<OtpRequestPasswordBloc>().add(OnRequestOtpReset());
@@ -39,8 +39,8 @@ class OtpRequestPasswordView extends StatelessWidget {
       builder: (context, state) {
         return OtpRequestView(
           isLoading: state.uiState is UiLoading,
-          title: 'otpRequestTitle'.tr(),
-          description: 'otpRequestDescription'.tr(),
+          title: 'pwdRequestTitle'.tr(),
+          description: 'pwdRequestDescription'.tr(),
           onPhoneNumberChange: (String v) {
             context.read<OtpRequestPasswordBloc>().add(OnUpdatePhone(v));
           },

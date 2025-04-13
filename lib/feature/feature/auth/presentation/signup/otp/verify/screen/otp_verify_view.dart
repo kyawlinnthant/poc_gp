@@ -56,8 +56,8 @@ class OtpVerifySignupView extends StatelessWidget {
           isLoading:
               state.verifyState is UiLoading || state.resendState is UiLoading,
           appBarTitle: 'verifyNumber'.tr(),
-          title: 'otpTitle'.tr(),
-          description: 'otpDescription'.tr(),
+          title: 'signupVerifyTitle'.tr(),
+          description: 'signupVerifyDescription'.tr(),
           onPinChange: (String v) {
             context.read<OtpVerifySignupBloc>().add(
               OnUpdateOtpVerifyOtp(otp: v),

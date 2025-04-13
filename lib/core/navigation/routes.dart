@@ -10,12 +10,14 @@ class Routes {
   static const String signupOTPVerify =
       '/otpVerifySignup/:${RouteParams.mobile}';
   static const String register = '/register/:${RouteParams.mobile}';
+  static const String registerSuccess = '/registerSuccess';
 
   // auth - password
   static const String forgotPwdOTPRequest = '/otpRequestPwd';
   static const String forgotPwdOTPVerify =
       '/otpVerifyPwd/:${RouteParams.mobile}';
   static const String resetPwd = '/resetPwd/:${RouteParams.mobile}';
+  static const String resetPwdSuccess = '/resetPwdSuccess';
 
   // auth - help
   static const String helpCenter = '/help';

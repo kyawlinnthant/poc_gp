@@ -92,9 +92,16 @@ class OnboardingScreenState extends State<OnBoardScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: Icon(Icons.language, size: 30, color: Colors.black),
-            onPressed: _showLanguageDialog,
+          Padding(
+            padding: EdgeInsets.only(right: Dimens.paddingBase),
+            child: IconButton(
+              icon: Icon(
+                Icons.language,
+                size: 24,
+                color: context.colors.onSurface,
+              ),
+              onPressed: _showLanguageDialog,
+            ),
           ),
         ],
       ),

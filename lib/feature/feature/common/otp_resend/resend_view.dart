@@ -31,7 +31,7 @@ class ResentView extends StatelessWidget {
                   onResend();
                 },
                 child: Text(
-                  'otp_resend'.tr(),
+                  'resend'.tr(),
                   style: context.textStyles.labelLarge,
                 ),
               ),

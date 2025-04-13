@@ -38,8 +38,8 @@ class OtpRequestSignupView extends StatelessWidget {
       builder: (context, state) {
         return OtpRequestView(
           isLoading: state.uiState is UiLoading,
-          title: 'otpRequestTitle'.tr(),
-          description: 'otpRequestDescription'.tr(),
+          title: 'signupRequestTitle'.tr(),
+          description: 'signupRequestDescription'.tr(),
           onPhoneNumberChange: (String v) {
             context.read<OtpRequestSignupBloc>().add(OnUpdatePhone(v));
           },

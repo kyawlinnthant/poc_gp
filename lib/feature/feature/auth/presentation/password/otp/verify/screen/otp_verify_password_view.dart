@@ -32,7 +32,7 @@ class OtpVerifyPasswordView extends StatelessWidget {
         }
         if (state.verifyState is UiSuccess) {
           context.push(
-            Routes.register,
+            Routes.resetPwd,
             extra: MobileNumber(
               prefix: state.mobileNumber.prefix,
               phoneNumber: state.mobileNumber.phoneNumber,
@@ -56,8 +56,8 @@ class OtpVerifyPasswordView extends StatelessWidget {
           isLoading:
               state.verifyState is UiLoading || state.resendState is UiLoading,
           appBarTitle: 'verifyNumber'.tr(),
-          title: 'otpTitle'.tr(),
-          description: 'otpDescription'.tr(),
+          title: 'pwdVerifyTitle'.tr(),
+          description: 'pwdVerifyDescription'.tr(),
           onPinChange: (String v) {
             context.read<OtpVerifyPasswordBloc>().add(
               OnUpdateOtpVerifyOtp(otp: v),

@@ -10,6 +10,9 @@ import 'package:poc/feature/feature/auth/presentation/signup/register/bloc/regis
 import '../../../../../core/di/di.dart';
 import '../../../../../data/network/dio_client.dart';
 import '../../presentation/login/bloc/login_bloc.dart';
+import '../../presentation/password/otp/request/bloc/request_otp_bloc.dart';
+import '../../presentation/password/otp/verify/bloc/otp_verify_bloc.dart';
+import '../../presentation/password/reset/bloc/reset_password_bloc.dart';
 import '../../presentation/signup/otp/request/bloc/request_otp_bloc.dart';
 import '../../presentation/signup/otp/verify/bloc/otp_verify_bloc.dart';
 
@@ -31,16 +34,28 @@ void provideAuthDi() {
 }
 
 void _provideAuthBloc() {
+  // login
   getIt.registerFactory<LoginBloc>(
     () => LoginBloc(repository: getIt<AuthRepository>()),
   );
-  getIt.registerFactory<RegisterBloc>(
-    () => RegisterBloc(repository: getIt<AuthRepository>()),
-  );
+  // signup
   getIt.registerFactory<OtpRequestSignupBloc>(
     () => OtpRequestSignupBloc(repository: getIt<AuthRepository>()),
   );
   getIt.registerFactory<OtpVerifySignupBloc>(
     () => OtpVerifySignupBloc(repository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<RegisterBloc>(
+    () => RegisterBloc(repository: getIt<AuthRepository>()),
+  );
+  // password
+  getIt.registerFactory<OtpRequestPasswordBloc>(
+    () => OtpRequestPasswordBloc(repository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<OtpVerifyPasswordBloc>(
+    () => OtpVerifyPasswordBloc(repository: getIt<AuthRepository>()),
+  );
+  getIt.registerFactory<ResetPasswordBloc>(
+    () => ResetPasswordBloc(repository: getIt<AuthRepository>()),
   );
 }

@@ -34,7 +34,10 @@ class AuthRepositoryImpl extends AuthRepository {
     required String phone,
     required String authId,
   }) async {
-    final response = await apiService.requestOTP(
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+
+    /*final response = await apiService.requestOTP(
       username: phone,
       authId: authId,
     );
@@ -52,7 +55,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
-    }
+    }*/
   }
 
   @override
@@ -60,7 +63,10 @@ class AuthRepositoryImpl extends AuthRepository {
     required String phone,
     required String otp,
   }) async {
-    final response = await apiService.verifyOTP(username: phone, otp: otp);
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+
+    /*final response = await apiService.verifyOTP(username: phone, otp: otp);
 
     switch (response) {
       case NetworkSuccess<SuccessResponse>():
@@ -75,7 +81,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
-    }
+    }*/
   }
 
   @override
@@ -83,7 +89,10 @@ class AuthRepositoryImpl extends AuthRepository {
     required String phone,
     required String authId,
   }) async {
-    final response = await apiService.resendOTP(
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+
+    /*final response = await apiService.resendOTP(
       username: phone,
       authId: authId,
     );
@@ -101,7 +110,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
-    }
+    }*/
   }
 
   @override
@@ -167,6 +176,15 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
+  Future<NetworkResource<bool>> verifyOtpPassword({
+    required String phone,
+    required String otp,
+  }) async {
+    await Future.delayed(Duration(seconds: 2));
+    return NetworkSuccess(data: true);
+  }
+
+  @override
   Future<NetworkResource<bool>> resentOtpPassword({
     required String phone,
     required String authId,
@@ -180,15 +198,6 @@ class AuthRepositoryImpl extends AuthRepository {
     required String prefix,
     required String phone,
     required String password,
-  }) async {
-    await Future.delayed(Duration(seconds: 2));
-    return NetworkSuccess(data: true);
-  }
-
-  @override
-  Future<NetworkResource<bool>> verifyOtpPassword({
-    required String phone,
-    required String otp,
   }) async {
     await Future.delayed(Duration(seconds: 2));
     return NetworkSuccess(data: true);

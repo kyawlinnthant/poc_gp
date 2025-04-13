@@ -18,7 +18,7 @@ class PinRepositoryImpl implements PinRepository {
   Future<NetworkResource<bool>> createPin({required String pin}) async {
     // todo: after create pin, should go to eKYC process.
     await Future.delayed(Duration(seconds: 2));
-    await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.landing);
+    await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.eKyc);
     return NetworkSuccess(data: true);
   }
 }

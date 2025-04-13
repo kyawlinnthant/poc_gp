@@ -31,7 +31,7 @@ class ResetPasswordView extends StatelessWidget {
           );
         }
         if (state.uiState is UiSuccess) {
-          context.go(Routes.createPin);
+          context.go(Routes.resetPwdSuccess);
         }
       },
 
@@ -54,12 +54,12 @@ class ResetPasswordView extends StatelessWidget {
                           children: [
                             VerticalSpacer(),
                             Text(
-                              'signupTitle'.tr(),
+                              'pwdResetTitle'.tr(),
                               style: context.textStyles.titleLarge,
                             ),
                             VerticalSpacer(),
                             Text(
-                              'signupDescription'.tr(),
+                              'pwdResetDescription'.tr(),
                               style: context.textStyles.labelMedium,
                             ),
 

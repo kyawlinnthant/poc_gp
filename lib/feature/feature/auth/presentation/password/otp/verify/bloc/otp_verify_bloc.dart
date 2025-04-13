@@ -38,7 +38,7 @@ class OtpVerifyPasswordBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
     required String opt,
   }) async {
     emit(state.copyWith(verifyState: UiLoading(), resendState: UiIdle()));
-    final response = await repository.verifyOtpSignup(
+    final response = await repository.verifyOtpPassword(
       phone: "${state.mobileNumber.prefix}${state.mobileNumber.phoneNumber}",
       otp: opt,
     );

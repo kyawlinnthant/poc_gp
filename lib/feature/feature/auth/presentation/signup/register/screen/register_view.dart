@@ -32,7 +32,7 @@ class RegisterView extends StatelessWidget {
           );
         }
         if (state.uiState is UiSuccess) {
-          context.go(Routes.createPin);
+          context.go(Routes.registerSuccess);
         }
       },
 

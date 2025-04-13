@@ -3,7 +3,9 @@ import 'package:poc/core/navigation/routes.dart';
 import 'package:poc/domain/model/mobile_number.dart';
 import 'package:poc/feature/feature/auth/presentation/password/otp/request/screen/otp_request_password_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/password/reset/screen/reset_pwd_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/password/success/password_success_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/register/screen/register_screen.dart';
+import 'package:poc/feature/feature/auth/presentation/signup/success/signup_success_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
 import '../../data/store/app_data/app_launch_mode.dart';
@@ -48,6 +50,10 @@ final GoRouter appNavigator = GoRouter(
         return RegisterScreen(mobileNumber: phone);
       },
     ),
+    GoRoute(
+      path: Routes.registerSuccess,
+      builder: (context, state) => SignupSuccessScreen(),
+    ),
     // password
     GoRoute(
       path: Routes.forgotPwdOTPRequest,
@@ -66,6 +72,10 @@ final GoRouter appNavigator = GoRouter(
         final phone = state.extra as MobileNumber;
         return ResetPasswordScreen(mobileNumber: phone);
       },
+    ),
+    GoRoute(
+      path: Routes.resetPwdSuccess,
+      builder: (context, state) => PasswordSuccessScreen(),
     ),
     // PIN
     GoRoute(
