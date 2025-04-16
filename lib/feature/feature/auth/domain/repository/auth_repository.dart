@@ -6,12 +6,15 @@ import '../../data/dto/login_dto.dart';
 abstract class AuthRepository {
   // signup - OTP
   Future<NetworkResource<bool>> requestOtpSignup({
+    required String prefix,
     required String phone,
-    required String authId,
+    required String type,
   });
 
   Future<NetworkResource<bool>> verifyOtpSignup({
+    required String prefix,
     required String phone,
+    required int type,
     required String otp,
   });
 

@@ -17,6 +17,7 @@ class HeaderInterceptor extends Interceptor {
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
+    options.headers['client-id'] = '418276b7f774b0ae0ae012e1d0c10d6a';
     super.onRequest(options, handler);
   }
 }

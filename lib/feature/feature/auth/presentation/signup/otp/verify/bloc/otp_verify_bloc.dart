@@ -15,7 +15,7 @@ class OtpVerifySignupBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
         case OnSetPhoneVerifyOtp():
           emit(state.copyWith(mobileNumber: event.mobileNumber));
         case OnRequestVerifyOtp():
-          await _verifyOtp(emit: emit, opt: event.otp);
+          await _verifyOtp(emit: emit, otp: event.otp);
         case OnResendVerifyOtp():
           await _resentOtp(emit: emit);
         case OnUpdateOtpVerifyOtp():
@@ -35,12 +35,14 @@ class OtpVerifySignupBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
 
   Future<void> _verifyOtp({
     required Emitter<VerifyOtpState> emit,
-    required String opt,
+    required String otp,
   }) async {
     emit(state.copyWith(verifyState: UiLoading(), resendState: UiIdle()));
     final response = await repository.verifyOtpSignup(
-      phone: "${state.mobileNumber.prefix}${state.mobileNumber.phoneNumber}",
-      otp: opt,
+      prefix: state.mobileNumber.prefix.trim(),
+      phone: state.mobileNumber.phoneNumber.trim(),
+      type: 2, // todo : ask this type ( make with enum )
+      otp: otp.trim(),
     );
     switch (response) {
       case NetworkSuccess<bool>():

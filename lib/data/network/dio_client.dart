@@ -9,7 +9,7 @@ class DioClient {
   DioClient()
     : _dio = Dio(
         BaseOptions(
-          baseUrl: 'https://intstaging.kiplepay.com:2087',
+          baseUrl: 'https://util-staging.kiplepay.com:8080',
           headers: {
             'Accept': 'application/json; charset=utf-8',
             'Content-Type': 'application/json; charset=utf-8',

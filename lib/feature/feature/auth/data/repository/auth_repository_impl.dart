@@ -31,57 +31,122 @@ class AuthRepositoryImpl extends AuthRepository {
   // signup
   @override
   Future<NetworkResource<bool>> requestOtpSignup({
+    required String prefix,
     required String phone,
-    required String authId,
+    required String type,
   }) async {
-    await Future.delayed(Duration(seconds: 2));
-    return NetworkSuccess(data: true);
-
-    /*final response = await apiService.requestOTP(
-      username: phone,
-      authId: authId,
+    final response = await apiService.requestSignupOTP(
+      mobile: '$prefix$phone',
+      type: type,
+      deviceModel: '0',
+      deviceId: '0',
+      ipAddress: '0',
+      latitude: '0',
+      longitude: '0',
     );
 
     switch (response) {
       case NetworkSuccess<SuccessResponse>():
         final data = response.data!;
-        if (data.success) {
-          return NetworkSuccess(data: data.success);
+        if (checkResponse(message: data.message)) {
+          return NetworkSuccess(data: true);
         } else {
-          return NetworkFailed(
-            message: data.message ?? 'somethingWentWrong'.tr(),
-          );
+          return NetworkFailed(message: data.message);
         }
 
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
-    }*/
+    }
   }
 
   @override
   Future<NetworkResource<bool>> verifyOtpSignup({
+    required String prefix,
     required String phone,
+    required int type,
     required String otp,
   }) async {
-    await Future.delayed(Duration(seconds: 2));
-    return NetworkSuccess(data: true);
-
-    /*final response = await apiService.verifyOTP(username: phone, otp: otp);
+    final response = await apiService.verifySignupOTP(
+      mobile: '$prefix$phone',
+      type: type,
+      otp: otp,
+      deviceModel: '0',
+      deviceId: '0',
+      ipAddress: '0',
+      latitude: '0',
+      longitude: '0',
+    );
 
     switch (response) {
       case NetworkSuccess<SuccessResponse>():
         final data = response.data!;
-        if (data.success) {
-          return NetworkSuccess(data: data.success);
+        if (checkResponse(message: data.message)) {
+          return NetworkSuccess(data: true);
+        } else {
+          return NetworkFailed(message: data.message);
+        }
+
+      case NetworkFailed<SuccessResponse>():
+        return NetworkFailed(message: response.message);
+    }
+  }
+
+  @override
+  Future<NetworkResource<bool>> register({
+    required String prefix,
+    required String phone,
+    required String password,
+    required String email,
+  }) async {
+    String brand = await deviceInfo.getDeviceBrand();
+    String deviceUniqueId = await deviceInfo.getDeviceUniqueId();
+    String osVersion = await deviceInfo.getDeviceOsVersion();
+    String deviceModel = await deviceInfo.getDeviceModel();
+    String deviceManufacturer = await deviceInfo.getDeviceManufacturer();
+
+    final response = await apiService.register(
+      mobile: '$prefix$phone',
+      prefix: prefix,
+      password: password,
+      email: email,
+
+      longitude: '0',
+      latitude: '0',
+      appVersion: '001',
+      ipAddress: '0',
+      brand: brand,
+      deviceUniqueId: deviceUniqueId,
+      osVersion: osVersion,
+      deviceModel: deviceModel,
+      deviceManufacturer: deviceManufacturer,
+    );
+    switch (response) {
+      case NetworkSuccess<SuccessResponse>():
+        final success = response.data!;
+        if (checkResponse(message: success.message)) {
+          final registerResponse = response.data?.data;
+          RegisterDto dto = RegisterDto.fromJson(registerResponse);
+          final userData = toUserData(
+            dto: dto,
+            password: password,
+            prefix: prefix,
+          );
+          await appUserStore.saveUserData(userData);
+          await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.createPin);
+          final token = dto.token;
+          final userId = dto.userId;
+          await appKeyStore.saveUserId(userId);
+          await appKeyStore.saveAccessToken(token);
+          return NetworkSuccess(data: true);
         } else {
           return NetworkFailed(
-            message: data.message ?? 'somethingWentWrong'.tr(),
+            message: response.data?.message ?? 'somethingWentWrong'.tr(),
           );
         }
 
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
-    }*/
+    }
   }
 
   @override
@@ -111,57 +176,6 @@ class AuthRepositoryImpl extends AuthRepository {
       case NetworkFailed<SuccessResponse>():
         return NetworkFailed(message: response.message);
     }*/
-  }
-
-  @override
-  Future<NetworkResource<bool>> register({
-    required String prefix,
-    required String phone,
-    required String password,
-    required String email,
-  }) async {
-    // todo:
-    await Future.delayed(Duration(seconds: 2));
-    await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.createPin);
-    return NetworkSuccess(data: true);
-
-    String brand = await deviceInfo.getDeviceBrand();
-    String deviceUniqueId = await deviceInfo.getDeviceUniqueId();
-    String osVersion = await deviceInfo.getDeviceOsVersion();
-    String deviceModel = await deviceInfo.getDeviceModel();
-    String deviceManufacturer = await deviceInfo.getDeviceManufacturer();
-
-    final response = await apiService.register(
-      prefix: prefix,
-      phone: phone,
-      password: password,
-      email: email,
-      longitude: '',
-      latitude: '',
-      appVersion: '001',
-      ipAddress: '',
-      brand: brand,
-      deviceUniqueId: deviceUniqueId,
-      osVersion: osVersion,
-      deviceModel: deviceModel,
-      deviceManufacturer: deviceManufacturer,
-    );
-    switch (response) {
-      case NetworkSuccess<RegisterDto>():
-        final successResponse = response.data?.data;
-        if (successResponse != null) {
-          final userData = toUserData(dto: successResponse, password: password);
-          await appUserStore.saveUserData(userData);
-          await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.createPin);
-          final token = successResponse.accessToken ?? '';
-          await appKeyStore.saveAccessToken(token);
-          return NetworkSuccess(data: token.isNotEmpty);
-        } else {
-          return NetworkFailed(message: 'somethingWentWrong'.tr());
-        }
-      case NetworkFailed<RegisterDto>():
-        return NetworkFailed(message: response.message);
-    }
   }
 
   // password
