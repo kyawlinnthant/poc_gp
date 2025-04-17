@@ -66,6 +66,7 @@ class OtpVerifyPasswordBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
       case NetworkSuccess<bool>():
         if (response.data != null) {
           emit(state.copyWith(resendState: UiError('otpSent'.tr())));
+          emit(state.copyWith(resendState: UiSuccess()));
         }
       case NetworkFailed<bool>():
         emit(state.copyWith(resendState: UiError(response.message)));

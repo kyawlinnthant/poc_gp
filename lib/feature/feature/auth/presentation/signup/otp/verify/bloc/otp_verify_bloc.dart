@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../../data/network/resource/network_resource.dart';
 import '../../../../../../../ui/state/ui_state.dart';
@@ -67,6 +67,7 @@ class OtpVerifySignupBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
       case NetworkSuccess<bool>():
         if (response.data != null) {
           emit(state.copyWith(resendState: UiError('otpSent'.tr())));
+          emit(state.copyWith(resendState: UiSuccess()));
         }
       case NetworkFailed<bool>():
         emit(state.copyWith(resendState: UiError(response.message)));
