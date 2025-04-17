@@ -23,7 +23,8 @@ class DioClient {
           },
         ),
       ) {
-    _dio.interceptors.addAll([HeaderInterceptor(), LoggerInterceptor()]);
+    // _dio.interceptors.addAll([HeaderInterceptor(), LoggerInterceptor()]);
+    _dio.interceptors.addAll([LoggerInterceptor()]);
   }
 
   Dio get dio => _dio;

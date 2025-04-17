@@ -1,27 +1,54 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:poc/feature/ui/component/default_text_field.dart';
-import 'package:poc/feature/ui/component/password_text_field.dart';
-import 'package:poc/feature/ui/component/phone_text_field.dart';
-import 'package:poc/feature/ui/spacer/vertical_spacer.dart';
+import 'package:poc/data/store/user_data/app_user_store.dart';
+import 'package:poc/data/store/user_data/user_data.dart';
 
 import '../../../core/di/di.dart';
-import '../../../data/store/app_data/app_data_store.dart';
-import '../../../data/store/app_data/app_language.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userStore = getIt<AppUserStore>();
     return Scaffold(
-      appBar: AppBar(title: Text("Settings")),
+      appBar: AppBar(title: const Text("Landing")),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FilledButton(
+        child: FutureBuilder<UserData?>(
+          future: userStore.getUserData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              ); // Loading
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}')); // Error
+            } else if (!snapshot.hasData || snapshot.data == null) {
+              return const Center(
+                child: Text('No user data found.'),
+              ); // Empty state
+            } else {
+              final user = snapshot.data!;
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Name: ${user.prefix}${user.mobile}"),
+                    Text("Email: ${user.email}"),
+                    // Add more fields as needed
+                  ],
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+// todo : setting change language
+/*
+* FilledButton(
                 onPressed: () => changeLanguage(context, Locale('en')),
                 child: Text("English"),
               ),
@@ -29,14 +56,8 @@ class LandingScreen extends StatelessWidget {
                 onPressed: () => changeLanguage(context, Locale('my')),
                 child: Text("မြန်မာ"),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  void changeLanguage(BuildContext context, Locale newLocale) async {
+              *
+              * void changeLanguage(BuildContext context, Locale newLocale) async {
     // Change the language in EasyLocalization
     await context.setLocale(newLocale);
     final appDataStore = getIt.get<AppDataStore>();
@@ -45,4 +66,4 @@ class LandingScreen extends StatelessWidget {
     );
     await appDataStore.saveAppLanguage(language: newLang);
   }
-}
+* */

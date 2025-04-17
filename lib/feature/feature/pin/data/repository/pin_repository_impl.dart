@@ -17,6 +17,13 @@ class PinRepositoryImpl implements PinRepository {
   @override
   Future<NetworkResource<bool>> createPin({required String pin}) async {
     // todo: after create pin, should go to eKYC process.
+    //{    "code": 0,
+    //     "msg": "wallet pin createrd",
+    //     "data": {
+    //         "wallet_sn": 0
+    //     },
+    //     "time": 1744367642494
+    // }
     await Future.delayed(Duration(seconds: 2));
     await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.eKyc);
     return NetworkSuccess(data: true);

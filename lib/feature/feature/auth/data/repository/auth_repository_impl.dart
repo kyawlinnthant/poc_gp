@@ -127,9 +127,9 @@ class AuthRepositoryImpl extends AuthRepository {
           final registerResponse = response.data?.data;
           RegisterDto dto = RegisterDto.fromJson(registerResponse);
           final userData = toUserData(
-            dto: dto,
-            password: password,
             prefix: prefix,
+            mobile: dto.mobile,
+            email: dto.email,
           );
           await appUserStore.saveUserData(userData);
           await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.createPin);
@@ -149,41 +149,13 @@ class AuthRepositoryImpl extends AuthRepository {
     }
   }
 
-  @override
-  Future<NetworkResource<bool>> resentOtpSignup({
-    required String phone,
-    required String authId,
-  }) async {
-    await Future.delayed(Duration(seconds: 2));
-    return NetworkSuccess(data: true);
-
-    /*final response = await apiService.resendOTP(
-      username: phone,
-      authId: authId,
-    );
-
-    switch (response) {
-      case NetworkSuccess<SuccessResponse>():
-        final data = response.data!;
-        if (data.success) {
-          return NetworkSuccess(data: data.success);
-        } else {
-          return NetworkFailed(
-            message: data.message ?? 'somethingWentWrong'.tr(),
-          );
-        }
-
-      case NetworkFailed<SuccessResponse>():
-        return NetworkFailed(message: response.message);
-    }*/
-  }
-
   // password
 
   @override
   Future<NetworkResource<bool>> requestOtpPassword({
+    required String prefix,
     required String phone,
-    required String authId,
+    required String type,
   }) async {
     await Future.delayed(Duration(seconds: 2));
     return NetworkSuccess(data: true);
@@ -191,17 +163,10 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<NetworkResource<bool>> verifyOtpPassword({
+    required String prefix,
     required String phone,
+    required int type,
     required String otp,
-  }) async {
-    await Future.delayed(Duration(seconds: 2));
-    return NetworkSuccess(data: true);
-  }
-
-  @override
-  Future<NetworkResource<bool>> resentOtpPassword({
-    required String phone,
-    required String authId,
   }) async {
     await Future.delayed(Duration(seconds: 2));
     return NetworkSuccess(data: true);
@@ -219,30 +184,53 @@ class AuthRepositoryImpl extends AuthRepository {
 
   // login
   @override
-  Future<NetworkResource<LoginDto>> login({
+  Future<NetworkResource<bool>> login({
+    required String prefix,
     required String phone,
+    required int type,
     required String password,
   }) async {
-    // todo:
-    await Future.delayed(Duration(seconds: 2));
-
-    return NetworkFailed(message: "Something went wrong!");
+    String deviceUniqueId = await deviceInfo.getDeviceUniqueId();
+    String deviceModel = await deviceInfo.getDeviceModel();
 
     final response = await apiService.login(
-      username: phone,
+      mobile: '$prefix$phone',
       password: password,
-    );
 
-    if (response is NetworkSuccess<LoginDto>) {
-      final data = response.data!;
-      if (data.accessToken.isNotEmpty) {
-        // await prefService.setToken(token: data.accessToken);
-        // await prefService.setUsername(name: data.username);
-        // await prefService.setEmail(email: data.email);
-        // await prefService.setIsAuthenticated(true);
-      }
+      longitude: '0',
+      latitude: '0',
+      ipAddress: '0',
+      deviceModel: deviceModel,
+      type: type,
+      deviceId: deviceUniqueId,
+    );
+    switch (response) {
+      case NetworkSuccess<SuccessResponse>():
+        final success = response.data!;
+        if (checkResponse(message: success.message)) {
+          final registerResponse = response.data?.data;
+          LoginDto dto = LoginDto.fromJson(registerResponse);
+          final userData = toUserData(
+            prefix: prefix,
+            mobile: dto.mobile,
+            email: dto.email,
+          );
+          await appUserStore.saveUserData(userData);
+          await appDataStore.saveAppLaunchMode(mode: AppLaunchMode.landing);
+          final token = dto.token;
+          final userId = dto.userId;
+          await appKeyStore.saveUserId(userId);
+          await appKeyStore.saveAccessToken(token);
+          return NetworkSuccess(data: true);
+        } else {
+          return NetworkFailed(
+            message: response.data?.message ?? 'somethingWentWrong'.tr(),
+          );
+        }
+
+      case NetworkFailed<SuccessResponse>():
+        return NetworkFailed(message: response.message);
     }
-    return response;
   }
 
   // store

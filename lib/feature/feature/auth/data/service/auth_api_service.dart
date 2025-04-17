@@ -4,15 +4,14 @@ import 'package:poc/data/network/resource/success_response.dart';
 
 import '../../../../../data/network/dio_client.dart';
 import '../../../../../data/network/resource/network_resource.dart';
-import '../dto/login_dto.dart';
-import '../dto/register_dto.dart';
+
+const String clientId = '418276b7f774b0ae0ae012e1d0c10d6a';
 
 class AuthApiService {
   final DioClient dioClient;
 
   AuthApiService({required this.dioClient});
 
-  // Auth
   /*
    {
     "mobile": "60412345678",
@@ -47,7 +46,10 @@ class AuthApiService {
           'latitude': latitude,
           'longitude': longitude,
         },
-        options: Options(contentType: Headers.jsonContentType),
+        options: Options(
+          headers: {'client-id': clientId},
+          contentType: Headers.jsonContentType,
+        ),
       ),
       fromJson: (json) => SuccessResponse.fromJson(json),
     );
@@ -90,7 +92,10 @@ class AuthApiService {
           'latitude': latitude,
           'longitude': longitude,
         },
-        options: Options(contentType: Headers.jsonContentType),
+        options: Options(
+          headers: {'client-id': clientId},
+          contentType: Headers.jsonContentType,
+        ),
       ),
       fromJson: (json) => SuccessResponse.fromJson(json),
     );
@@ -148,41 +153,60 @@ class AuthApiService {
           'device_model': deviceModel,
           'manufacturer': deviceManufacturer,
         },
-        options: Options(contentType: Headers.jsonContentType),
+        options: Options(
+          contentType: Headers.jsonContentType,
+          headers: {'client-id': '1'},
+        ),
       ),
       fromJson: (json) => SuccessResponse.fromJson(json),
     );
   }
 
-  Future<NetworkResource<SuccessResponse>> resendOTP({
-    required String username,
-    required String authId,
+  /*
+  {
+    "account": "600000000000",
+    "type": 2,
+
+    "device_model":"0",
+    "device_id":"0",
+    "ip_address":"0",
+    "latitude":"0",
+    "longitude":"0"
+}
+  * */
+  Future<NetworkResource<SuccessResponse>> login({
+    required String mobile,
+    required int type,
+    required String password,
+
+    required String deviceModel,
+    required String deviceId,
+    required String ipAddress,
+    required String latitude,
+    required String longitude,
   }) async {
     return safeApiCall<SuccessResponse>(
       dioRequest: dioClient.post(
-        '/api/account/v3/user-register-v1-send-request',
-        data: {'UserName': username, 'AuthId': authId},
-        options: Options(contentType: Headers.jsonContentType),
+        '/user/api/v1.0/users/login',
+        data: {
+          'account': mobile,
+          'type': type,
+          'password': password,
+          'device_model': deviceModel,
+          'device_id': deviceId,
+          'ip_address': ipAddress,
+          'latitude': latitude,
+          'longitude': longitude,
+        },
+        options: Options(
+          headers: {
+            'client-id': '1',
+            'token': 'admin-ff7c318faf2c4558ae4661378c3a4a63',
+          },
+          contentType: Headers.jsonContentType,
+        ),
       ),
       fromJson: (json) => SuccessResponse.fromJson(json),
-    );
-  }
-
-  Future<NetworkResource<LoginDto>> login({
-    required String username,
-    required String password,
-  }) async {
-    return safeApiCall<LoginDto>(
-      dioRequest: dioClient.post(
-        '/Token',
-        data: {
-          'grant_type': 'password',
-          'username': username,
-          'password': password,
-        },
-        options: Options(contentType: Headers.formUrlEncodedContentType),
-      ),
-      fromJson: (json) => LoginDto.fromJson(json),
     );
   }
 }

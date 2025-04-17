@@ -32,8 +32,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           );
         case OnSetMobile():
           emit(state.copyWith(mobileNumber: event.mobileNumber));
-        case OnSignupInit():
-          await _init(emit);
       }
     });
   }
@@ -90,23 +88,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         case NetworkFailed<bool>():
           emit(state.copyWith(uiState: UiError(response.message)));
       }
-    }
-  }
-
-  Future<void> _init(Emitter<RegisterState> emit) async {
-    final userData = await repository.getUserData();
-    emit(state.copyWith(alreadyRegistered: userData != null));
-    if (userData != null) {
-      emit(
-        state.copyWith(
-          email: userData.email,
-          password: userData.password,
-          confirmPassword: userData.password,
-          emailError: '',
-          passwordError: '',
-          confirmPasswordError: '',
-        ),
-      );
     }
   }
 }

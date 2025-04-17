@@ -53,5 +53,6 @@
   "resendCode": "Resend again in :",
   "pinNotMatch": "PIN does not match",
   "createPin": "Go Create PIN",
-  "goLogin": "Go back to Login"
+  "goLogin": "Go back to Login",
+  "otpSent": "OTP sent to your mobile number successfully."
 }

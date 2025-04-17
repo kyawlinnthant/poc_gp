@@ -11,8 +11,6 @@ final class OnSetMobile extends RegisterEvent {
 
 final class OnSignupPressed extends RegisterEvent {}
 
-final class OnSignupInit extends RegisterEvent {}
-
 final class OnUpdateEmail extends RegisterEvent {
   final String email;
 

@@ -18,11 +18,6 @@ abstract class AuthRepository {
     required String otp,
   });
 
-  Future<NetworkResource<bool>> resentOtpSignup({
-    required String phone,
-    required String authId,
-  });
-
   Future<NetworkResource<bool>> register({
     required String prefix,
     required String phone,
@@ -32,18 +27,16 @@ abstract class AuthRepository {
 
   // password - OTP
   Future<NetworkResource<bool>> requestOtpPassword({
+    required String prefix,
     required String phone,
-    required String authId,
+    required String type,
   });
 
   Future<NetworkResource<bool>> verifyOtpPassword({
+    required String prefix,
     required String phone,
+    required int type,
     required String otp,
-  });
-
-  Future<NetworkResource<bool>> resentOtpPassword({
-    required String phone,
-    required String authId,
   });
 
   Future<NetworkResource<bool>> resetPassword({
@@ -53,8 +46,10 @@ abstract class AuthRepository {
   });
 
   // login
-  Future<NetworkResource<LoginDto>> login({
+  Future<NetworkResource<bool>> login({
+    required String prefix,
     required String phone,
+    required int type,
     required String password,
   });
 

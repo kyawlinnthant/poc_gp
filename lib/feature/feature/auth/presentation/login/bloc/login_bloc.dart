@@ -6,7 +6,6 @@ import 'package:poc/feature/ui/state/ui_state.dart';
 import '../../../../../../core/constant/app_constant.dart';
 import '../../../../../../core/util/form_validator.dart';
 import '../../../../../../data/network/resource/network_resource.dart';
-import '../../../data/dto/login_dto.dart';
 import '../../../domain/repository/auth_repository.dart';
 
 part 'login_event.dart';
@@ -45,15 +44,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (_validate(emit: emit, phone: state.phone, password: state.password)) {
       emit(state.copyWith(uiState: UiLoading()));
       final response = await repository.login(
-        phone: state.phone,
+        phone: state.phone.trim(),
         password: state.password,
+        prefix: state.prefix.trim(),
+        type: 2,
       );
       switch (response) {
-        case NetworkSuccess<LoginDto>():
+        case NetworkSuccess<bool>():
           if (response.data != null) {
             emit(state.copyWith(uiState: UiSuccess()));
           }
-        case NetworkFailed<LoginDto>():
+        case NetworkFailed<bool>():
           emit(state.copyWith(uiState: UiError(response.message)));
       }
     }

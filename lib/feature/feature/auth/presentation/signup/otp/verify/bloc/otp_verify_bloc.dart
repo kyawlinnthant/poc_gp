@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../../../../../data/network/resource/network_resource.dart';
 import '../../../../../../../ui/state/ui_state.dart';
@@ -56,14 +57,16 @@ class OtpVerifySignupBloc extends Bloc<VerifyOtpEvent, VerifyOtpState> {
 
   Future<void> _resentOtp({required Emitter<VerifyOtpState> emit}) async {
     emit(state.copyWith(resendState: UiLoading(), verifyState: UiIdle()));
-    final response = await repository.resentOtpSignup(
-      phone: "${state.mobileNumber.prefix}${state.mobileNumber.phoneNumber}",
-      authId: "a3BsLTNyZC1wYXJ0eS1hcGk6MXFhelpBUSE=",
+
+    final response = await repository.requestOtpSignup(
+      prefix: state.mobileNumber.prefix.trim(),
+      phone: state.mobileNumber.phoneNumber.trim(),
+      type: '4', // todo : ask this type ( make enum )
     );
     switch (response) {
       case NetworkSuccess<bool>():
         if (response.data != null) {
-          emit(state.copyWith(resendState: UiSuccess()));
+          emit(state.copyWith(resendState: UiError('otpSent'.tr())));
         }
       case NetworkFailed<bool>():
         emit(state.copyWith(resendState: UiError(response.message)));

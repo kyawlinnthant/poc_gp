@@ -1,75 +1,60 @@
+/*
+  {
+        "username": "600000000000",
+        "full_name": "600000000000",
+        "gender": 0,
+        "mobile": "600000000000",
+        "email": "linn0000000000@kiple.com",
+        "token": "7ade6eca0b22425e977f8e4995e312a6",
+        "token_expire": "2025-05-17 23:42:30",
+        "user_id": "b22db1c85c1b48038112df677b1e3ed6"
+    }
+*/
+
 class LoginDto {
-  final String accessToken;
-  final String tokenType;
-  final num expiresIn;
-  final String issued;
-  final String expires;
   final String username;
+  final String fullName;
+  final String mobile;
   final String email;
-  final String roles;
-  final String phoneNumberConfirmed;
+  final String token;
+  final String tokenExpired;
+  final int gender;
+  final String userId;
 
   LoginDto({
-    required this.accessToken,
-    required this.tokenType,
-    required this.expiresIn,
-    required this.issued,
-    required this.expires,
     required this.username,
+    required this.fullName,
+    required this.mobile,
     required this.email,
-    required this.roles,
-    required this.phoneNumberConfirmed,
+    required this.token,
+    required this.tokenExpired,
+    required this.gender,
+    required this.userId,
   });
 
   factory LoginDto.fromJson(Map<String, dynamic> json) {
     return LoginDto(
-      accessToken: json['access_token'] as String,
-      tokenType: json['token_type'] as String,
-      expiresIn: json['expires_in'] as num,
-      issued: json['.issued'] as String,
-      expires: json['.expires'] as String,
-      username: json['userName'] as String,
-      email: json['Email'] as String,
-      roles: json['Roles'] as String,
-      phoneNumberConfirmed: json['PhoneNumberConfirmed'] as String,
+      username: json["username"] ?? '',
+      fullName: json["full_name"] ?? '',
+      mobile: json["mobile"] ?? '',
+      email: json["email"] ?? '',
+      token: json["token"] ?? '',
+      tokenExpired: json["token_expire"] ?? '',
+      gender: json["gender"] ?? '',
+      userId: json["user_id"] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'access_token': accessToken,
-      'token_type': tokenType,
-      'expires_in': expiresIn,
-      '.issued': issued,
-      '.expires': expires,
-      'userName': username,
-      'Email': email,
-      'Roles': roles,
-      'PhoneNumberConfirmed': phoneNumberConfirmed,
+      "username": username,
+      "full_name": fullName,
+      "mobile": mobile,
+      "email": email,
+      "token": token,
+      "token_expire": tokenExpired,
+      "gender": gender,
+      "user_id": userId,
     };
-  }
-
-  LoginDto copyWith({
-    String? accessToken,
-    String? tokenType,
-    num? expiresIn,
-    String? issued,
-    String? expires,
-    String? username,
-    String? email,
-    String? roles,
-    String? phoneNumberConfirmed,
-  }) {
-    return LoginDto(
-      accessToken: accessToken ?? this.accessToken,
-      tokenType: tokenType ?? this.tokenType,
-      expiresIn: expiresIn ?? this.expiresIn,
-      issued: issued ?? this.issued,
-      expires: expires ?? this.expires,
-      username: username ?? this.username,
-      email: email ?? this.email,
-      roles: roles ?? this.roles,
-      phoneNumberConfirmed: phoneNumberConfirmed ?? this.phoneNumberConfirmed,
-    );
   }
 }

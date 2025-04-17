@@ -39,8 +39,9 @@ class OtpRequestPasswordBloc extends Bloc<OtpRequestEvent, OtpRequestState> {
     if (_validate(emit: emit, phone: state.phone)) {
       emit(state.copyWith(uiState: UiLoading()));
       final response = await repository.requestOtpPassword(
-        phone: "${state.prefix.trim()}${state.phone.trim()}",
-        authId: "a3BsLTNyZC1wYXJ0eS1hcGk6MXFhelpBUSE=",
+        prefix: state.prefix.trim(),
+        phone: state.phone.trim(),
+        type: '4', // todo : ask this type ( make enum )
       );
       switch (response) {
         case NetworkSuccess<bool>():
