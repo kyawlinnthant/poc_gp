@@ -23,7 +23,10 @@ class EkycGuideItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(Dimens.paddingBase),
+      padding: EdgeInsets.symmetric(
+        vertical: Dimens.paddingBase,
+        horizontal: Dimens.paddingBase2x,
+      ),
       decoration: BoxDecoration(
         border: Border.all(
           color: context.colors.outline.withValues(alpha: Alpha.small),
@@ -53,7 +56,7 @@ class EkycGuideItem extends StatelessWidget {
           SizedBox(
             child: Icon(
               image,
-              size: 45,
+              size: 42,
               color: context.colors.onPrimaryContainer,
             ),
           ),

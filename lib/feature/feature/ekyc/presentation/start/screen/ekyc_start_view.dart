@@ -113,7 +113,7 @@ class EkycStartView extends StatelessWidget {
                           ),
                           child: FilledButton(
                             onPressed: () {
-                              context.go(Routes.ekycSuccess);
+                              context.push(Routes.eKycGuide);
                             },
                             child: Text('beginEkyc'.tr()),
                           ),

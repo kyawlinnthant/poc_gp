@@ -7,7 +7,10 @@ import 'package:poc/feature/feature/auth/presentation/password/success/password_
 import 'package:poc/feature/feature/auth/presentation/signup/register/screen/register_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/success/signup_success_screen.dart';
 import 'package:poc/feature/feature/ekyc/presentation/guide/ekyc_guide_screen.dart';
+import 'package:poc/feature/feature/ekyc/presentation/selfie/confirm/ekyc_selfie_confirm_screen.dart';
+import 'package:poc/feature/feature/ekyc/presentation/selfie/take/ekyc_selfie_confirm_screen.dart';
 import 'package:poc/feature/feature/ekyc/presentation/success/ekyc_success_screen.dart';
+import 'package:poc/feature/feature/ekyc/presentation/type_choose/ekyc_type_choose_screen.dart';
 import 'package:poc/feature/feature/pin/presentation/success/pin_success_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
@@ -18,6 +21,7 @@ import '../../feature/feature/auth/presentation/privacy_terms/privacy_terms_scre
 import '../../feature/feature/auth/presentation/signup/otp/request/screen/otp_request_signup_screen.dart';
 import '../../feature/feature/auth/presentation/signup/otp/verify/screen/otp_verify_screen.dart';
 import '../../feature/feature/ekyc/presentation/start/screen/ekyc_start_screen.dart';
+import '../../feature/feature/ekyc/presentation/type_choose/passport/passport_one.dart';
 import '../../feature/feature/landing/landing_screen.dart';
 import '../../feature/feature/onboard/onboard_screen.dart';
 import '../../feature/feature/pin/presentation/confirm/screen/confirm_pin_screen.dart';
@@ -25,7 +29,7 @@ import '../../feature/feature/pin/presentation/create/screen/create_pin_screen.d
 import '../di/di.dart';
 
 final GoRouter appNavigator = GoRouter(
-  initialLocation: Routes.eKycGuide,
+  initialLocation: Routes.onboard,
   routes: [
     // ONBOARD
     GoRoute(path: Routes.onboard, builder: (context, state) => OnBoardScreen()),
@@ -107,7 +111,24 @@ final GoRouter appNavigator = GoRouter(
       builder: (context, state) => EkycGuideScreen(),
     ),
     GoRoute(
-      path: Routes.ekycSuccess,
+      path: Routes.eKycChooseType,
+      builder: (context, state) => EkycTypeChooseScreen(),
+    ),
+    GoRoute(
+      path: Routes.eKycSelfieTake,
+      builder: (context, state) => EkycSelfieTakeScreen(),
+    ),
+    GoRoute(
+      path: Routes.eKycSelfieConfirm,
+      builder: (context, state) => EkycSelfieConfirmScreen(),
+    ),
+    // PP
+    GoRoute(
+      path: Routes.eKycPp1,
+      builder: (context, state) => EkycPassportOneScreen(),
+    ),
+    GoRoute(
+      path: Routes.eKycSuccess,
       builder: (context, state) => EkycSuccessScreen(),
     ),
 

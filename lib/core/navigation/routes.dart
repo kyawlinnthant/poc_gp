@@ -33,7 +33,10 @@ class Routes {
   static const String eKycChooseType = '/eKycType';
   static const String eKycSelfieTake = '/eKycSelfieTake';
   static const String eKycSelfieConfirm = '/eKycSelfieConfirm';
-  static const String ekycSuccess = '/ekycSuccess';
+  static const String eKycSuccess = '/eKycSuccess';
+
+  // PP
+  static const String eKycPp1 = '/eKycPp1';
 
   // landing
   static const String landing = '/';

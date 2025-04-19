@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:poc/core/navigation/routes.dart';
 import 'package:poc/core/theme/extension.dart';
 import 'package:poc/feature/feature/ekyc/presentation/guide/guide_item.dart';
 
@@ -68,7 +70,9 @@ class EkycGuideScreen extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: Dimens.paddingBase2x),
                   child: FilledButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(Routes.eKycChooseType);
+                    },
                     child: Text('alright'.tr()),
                   ),
                 ),

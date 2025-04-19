@@ -41,6 +41,13 @@
   "ekycGuide2Description" : "Snap a photo of your ID or Passport",
   "ekycGuide3Title" : "Time for a Selfie",
   "ekycGuide4Description" : "Please take a selfie for ID verification",
+  "ekycChooseTypeDescription" : "Let's pick the document type for verification.",
+  "ekycType1Title": "National ID Card",
+  "ekycType1Description": "Only for Malaysians",
+  "ekycType2Title": "Passport",
+  "ekycType2Description": "For Non-Malaysians & PR",
+  "ekycType3Title": "UNHCR",
+  "ekycType3Description": "For Refugee & Non-Malaysians",
   "confirmPinTitle": "Re-Enter Wallet PIN",
   "haveAccount": "Have Account?",
   "newUser": "New User?",
@@ -73,5 +80,8 @@
   "allSet" : "All Set!",
   "beginEkyc" : "Begin the eKYC process",
   "alright" : "Alright, Let's do this",
-  "loginNewAccount": "Login to a new account"
+  "loginNewAccount": "Login to a new account",
+  "saveContinue" : "Save & Continue",
+  "takeAnotherSelfie" : "Take another selfie",
+  "confirmSelfie" : "Confirm your selfie"
 }
