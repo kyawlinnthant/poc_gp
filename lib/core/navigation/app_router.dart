@@ -6,6 +6,7 @@ import 'package:poc/feature/feature/auth/presentation/password/reset/screen/rese
 import 'package:poc/feature/feature/auth/presentation/password/success/password_success_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/register/screen/register_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/success/signup_success_screen.dart';
+import 'package:poc/feature/feature/ekyc/presentation/guide/ekyc_guide_screen.dart';
 import 'package:poc/feature/feature/ekyc/presentation/success/ekyc_success_screen.dart';
 import 'package:poc/feature/feature/pin/presentation/success/pin_success_screen.dart';
 
@@ -24,7 +25,7 @@ import '../../feature/feature/pin/presentation/create/screen/create_pin_screen.d
 import '../di/di.dart';
 
 final GoRouter appNavigator = GoRouter(
-  initialLocation: Routes.onboard,
+  initialLocation: Routes.eKycGuide,
   routes: [
     // ONBOARD
     GoRoute(path: Routes.onboard, builder: (context, state) => OnBoardScreen()),
@@ -100,6 +101,10 @@ final GoRouter appNavigator = GoRouter(
     GoRoute(
       path: Routes.eKycStart,
       builder: (context, state) => EkycStartScreen(),
+    ),
+    GoRoute(
+      path: Routes.eKycGuide,
+      builder: (context, state) => EkycGuideScreen(),
     ),
     GoRoute(
       path: Routes.ekycSuccess,

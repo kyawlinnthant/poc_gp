@@ -29,7 +29,7 @@ class Routes {
 
   // e-kyc
   static const String eKycStart = '/eKycStart';
-  static const String eKycFlow = '/eKycFlow';
+  static const String eKycGuide = '/eKycFlow';
   static const String eKycChooseType = '/eKycType';
   static const String eKycSelfieTake = '/eKycSelfieTake';
   static const String eKycSelfieConfirm = '/eKycSelfieConfirm';
