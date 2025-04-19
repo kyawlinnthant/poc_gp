@@ -25,13 +25,15 @@ class Routes {
   // pin
   static const String createPin = '/createPin';
   static const String confirmPin = '/confirmPin/:${RouteParams.oldPin}';
+  static const String pinSuccess = '/pinSuccess';
 
   // e-kyc
-  static const String eKycIntro = '/eKycIntro';
+  static const String eKycStart = '/eKycStart';
   static const String eKycFlow = '/eKycFlow';
   static const String eKycChooseType = '/eKycType';
   static const String eKycSelfieTake = '/eKycSelfieTake';
   static const String eKycSelfieConfirm = '/eKycSelfieConfirm';
+  static const String ekycSuccess = '/ekycSuccess';
 
   // landing
   static const String landing = '/';

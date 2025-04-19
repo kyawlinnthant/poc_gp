@@ -28,4 +28,8 @@ class AppKeyStore {
   Future<void> deleteUserId() async {
     await _storage.delete(key: _userIdKey);
   }
+
+  Future<void> reset() async {
+    await _storage.deleteAll();
+  }
 }

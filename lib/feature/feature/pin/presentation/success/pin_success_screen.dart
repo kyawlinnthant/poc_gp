@@ -6,15 +6,15 @@ import 'package:poc/core/theme/extension.dart';
 
 import '../../../../../../core/navigation/routes.dart';
 import '../../../../../../core/theme/dimen.dart';
-import '../../../../../ui/spacer/vertical_spacer.dart';
-import '../../../../../ui/view/orientation.dart';
+import '../../../../ui/spacer/vertical_spacer.dart';
+import '../../../../ui/view/orientation.dart';
 
-class SignupSuccessScreen extends StatelessWidget {
-  const SignupSuccessScreen({super.key});
+class PinSuccessScreen extends StatelessWidget {
+  const PinSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String assetName = 'assets/image/svg/register_success.svg';
+    String assetName = 'assets/image/svg/pin_success.svg';
     return Scaffold(
       appBar: AppBar(),
       resizeToAvoidBottomInset: false,
@@ -36,18 +36,18 @@ class SignupSuccessScreen extends StatelessWidget {
                             height: 200,
                             child: SvgPicture.asset(
                               assetName,
-                              semanticsLabel: 'Success Register',
+                              semanticsLabel: 'PIN Success',
                             ),
                           ),
                         ),
                         VerticalSpacer(height: Dimens.paddingBase3x),
                         Text(
-                          'signupSuccessTitle'.tr(),
+                          'pinSuccessTitle'.tr(),
                           style: context.textStyles.titleLarge,
                         ),
                         VerticalSpacer(),
                         Text(
-                          'signupSuccessDescription'.tr(),
+                          'pinSuccessDescription'.tr(),
                           style: context.textStyles.labelMedium,
                         ),
                       ],
@@ -63,9 +63,9 @@ class SignupSuccessScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: Dimens.paddingBase2x),
                     child: FilledButton(
                       onPressed: () {
-                        context.go(Routes.createPin);
+                        context.go(Routes.eKycStart);
                       },
-                      child: Text('createPin'.tr()),
+                      child: Text('letGetStarted'.tr()),
                     ),
                   ),
                 ),

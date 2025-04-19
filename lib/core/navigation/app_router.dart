@@ -6,6 +6,8 @@ import 'package:poc/feature/feature/auth/presentation/password/reset/screen/rese
 import 'package:poc/feature/feature/auth/presentation/password/success/password_success_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/register/screen/register_screen.dart';
 import 'package:poc/feature/feature/auth/presentation/signup/success/signup_success_screen.dart';
+import 'package:poc/feature/feature/ekyc/presentation/success/ekyc_success_screen.dart';
+import 'package:poc/feature/feature/pin/presentation/success/pin_success_screen.dart';
 
 import '../../data/store/app_data/app_data_store.dart';
 import '../../data/store/app_data/app_launch_mode.dart';
@@ -14,6 +16,7 @@ import '../../feature/feature/auth/presentation/password/otp/verify/screen/otp_v
 import '../../feature/feature/auth/presentation/privacy_terms/privacy_terms_screen.dart';
 import '../../feature/feature/auth/presentation/signup/otp/request/screen/otp_request_signup_screen.dart';
 import '../../feature/feature/auth/presentation/signup/otp/verify/screen/otp_verify_screen.dart';
+import '../../feature/feature/ekyc/presentation/start/screen/ekyc_start_screen.dart';
 import '../../feature/feature/landing/landing_screen.dart';
 import '../../feature/feature/onboard/onboard_screen.dart';
 import '../../feature/feature/pin/presentation/confirm/screen/confirm_pin_screen.dart';
@@ -21,7 +24,7 @@ import '../../feature/feature/pin/presentation/create/screen/create_pin_screen.d
 import '../di/di.dart';
 
 final GoRouter appNavigator = GoRouter(
-  initialLocation: Routes.login,
+  initialLocation: Routes.onboard,
   routes: [
     // ONBOARD
     GoRoute(path: Routes.onboard, builder: (context, state) => OnBoardScreen()),
@@ -89,6 +92,20 @@ final GoRouter appNavigator = GoRouter(
         return ConfirmPinScreen(pin: pin);
       },
     ),
+    GoRoute(
+      path: Routes.pinSuccess,
+      builder: (context, state) => PinSuccessScreen(),
+    ),
+    // EKYC
+    GoRoute(
+      path: Routes.eKycStart,
+      builder: (context, state) => EkycStartScreen(),
+    ),
+    GoRoute(
+      path: Routes.ekycSuccess,
+      builder: (context, state) => EkycSuccessScreen(),
+    ),
+
     // HOME
     GoRoute(path: Routes.landing, builder: (context, state) => LandingScreen()),
   ],
@@ -100,7 +117,7 @@ final GoRouter appNavigator = GoRouter(
       Routes.onboard,
       Routes.login,
       Routes.createPin,
-      Routes.eKycIntro,
+      Routes.eKycStart,
       Routes.landing,
     ];
 
@@ -118,7 +135,7 @@ final GoRouter appNavigator = GoRouter(
     }
     if (launchMode == AppLaunchMode.eKyc &&
         mainRoutes.contains(state.matchedLocation)) {
-      return Routes.eKycIntro;
+      return Routes.eKycStart;
     }
     if (launchMode == AppLaunchMode.landing &&
         mainRoutes.contains(state.matchedLocation)) {

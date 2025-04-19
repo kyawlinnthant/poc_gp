@@ -4,6 +4,7 @@ import 'package:poc/data/store/app_data/app_data_store.dart';
 import 'package:poc/data/store/keys_data/app_key_store.dart';
 import 'package:poc/data/store/user_data/app_user_store.dart';
 import 'package:poc/feature/feature/auth/data/di/auth_di.dart';
+import 'package:poc/feature/feature/ekyc/data/di/ekyc_di.dart';
 import 'package:poc/feature/feature/pin/data/di/pin_di.dart';
 
 import '../../data/network/dio_client.dart';
@@ -23,4 +24,5 @@ void setupDi() {
 
   provideAuthDi();
   providePinDi();
+  provideEkycDi();
 }

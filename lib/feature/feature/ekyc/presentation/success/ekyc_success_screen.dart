@@ -6,17 +6,17 @@ import 'package:poc/core/theme/extension.dart';
 
 import '../../../../../../core/navigation/routes.dart';
 import '../../../../../../core/theme/dimen.dart';
-import '../../../../../ui/spacer/vertical_spacer.dart';
-import '../../../../../ui/view/orientation.dart';
+import '../../../../ui/spacer/vertical_spacer.dart';
+import '../../../../ui/view/orientation.dart';
 
-class SignupSuccessScreen extends StatelessWidget {
-  const SignupSuccessScreen({super.key});
+class EkycSuccessScreen extends StatelessWidget {
+  const EkycSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String assetName = 'assets/image/svg/register_success.svg';
+    String assetName = 'assets/image/svg/ekyc_success.svg';
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: context.colors.primary,
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: Dimens.paddingBase3x),
@@ -36,19 +36,27 @@ class SignupSuccessScreen extends StatelessWidget {
                             height: 200,
                             child: SvgPicture.asset(
                               assetName,
-                              semanticsLabel: 'Success Register',
+                              semanticsLabel: 'EKYC Success',
+                              colorFilter: ColorFilter.mode(
+                                context.colors.surface,
+                                BlendMode.srcIn,
+                              ),
                             ),
                           ),
                         ),
                         VerticalSpacer(height: Dimens.paddingBase3x),
                         Text(
-                          'signupSuccessTitle'.tr(),
-                          style: context.textStyles.titleLarge,
+                          'ekycSuccessTitle'.tr(),
+                          style: context.textStyles.titleLarge?.copyWith(
+                            color: context.colors.surface,
+                          ),
                         ),
                         VerticalSpacer(),
                         Text(
-                          'signupSuccessDescription'.tr(),
-                          style: context.textStyles.labelMedium,
+                          'ekycSuccessDescription'.tr(),
+                          style: context.textStyles.labelMedium?.copyWith(
+                            color: context.colors.surface,
+                          ),
                         ),
                       ],
                     ),
@@ -63,9 +71,17 @@ class SignupSuccessScreen extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: Dimens.paddingBase2x),
                     child: FilledButton(
                       onPressed: () {
-                        context.go(Routes.createPin);
+                        context.go(Routes.landing);
                       },
-                      child: Text('createPin'.tr()),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: context.colors.surface,
+                      ),
+                      child: Text(
+                        'allSet'.tr(),
+                        style: context.textStyles.labelMedium?.copyWith(
+                          color: context.colors.primary,
+                        ),
+                      ),
                     ),
                   ),
                 ),

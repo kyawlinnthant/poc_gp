@@ -26,4 +26,8 @@ class AppUserStore {
   Future<void> deleteUserData() async {
     await _storage.delete(key: _userDataKey);
   }
+
+  Future<void> reset() async {
+    await _storage.deleteAll();
+  }
 }

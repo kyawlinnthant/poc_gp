@@ -40,7 +40,9 @@ class ConfirmPinBloc extends Bloc<ConfirmPinEvent, ConfirmPinState> {
     final response = await repository.createPin(pin: state.pin);
     switch (response) {
       case NetworkSuccess<bool>():
-        emit(state.copyWith(uiState: UiSuccess()));
+        if (response.data != null) {
+          emit(state.copyWith(uiState: UiSuccess()));
+        }
       case NetworkFailed<bool>():
         emit(state.copyWith(uiState: UiError(response.message)));
     }

@@ -33,7 +33,7 @@ class ConfirmPinView extends StatelessWidget {
           context.read<ConfirmPinBloc>().add(OnResetUiStateConfirmPin());
         }
         if (state.uiState is UiSuccess) {
-          context.go(Routes.landing);
+          context.go(Routes.pinSuccess);
         }
       },
       builder: (context, state) {

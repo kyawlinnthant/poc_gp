@@ -1,7 +1,6 @@
 import 'package:poc/data/store/user_data/user_data.dart';
 
 import '../../../../../data/network/resource/network_resource.dart';
-import '../../data/dto/login_dto.dart';
 
 abstract class AuthRepository {
   // signup - OTP
